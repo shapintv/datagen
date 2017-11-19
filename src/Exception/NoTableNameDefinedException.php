@@ -1,6 +1,6 @@
 <?php
 
-namespace Bab\SimpleFixtures\Exception;
+namespace Bab\Datagen\Exception;
 
 class NoTableNameDefinedException extends \Exception
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Bab\SimpleFixtures;
+namespace Bab\Datagen;
 
-use Bab\SimpleFixtures\Exception\NoTableNameDefinedException;
+use Bab\Datagen\Exception\NoTableNameDefinedException;
 
 abstract class Fixture
 {

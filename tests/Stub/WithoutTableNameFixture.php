@@ -1,8 +1,8 @@
 <?php
 
-namespace Bab\SimpleFixtures\Tests\Stub;
+namespace Bab\Datagen\Tests\Stub;
 
-use Bab\SimpleFixtures\Fixture;
+use Bab\Datagen\Fixture;
 
 class WithoutTableNameFixture extends Fixture
 {

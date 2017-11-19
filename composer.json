@@ -1,7 +1,7 @@
 {
-    "name": "odolbeau/simple-dbal-fixtures",
-    "description": "A simple lib to deal with DBAL fixtures.",
-    "keywords": ["fixtures","doctrine","dbal","symfony"],
+    "name": "odolbeau/datagen",
+    "description": "A simple lib to deal with data.",
+    "keywords": ["fixtures","database","dbal","symfony"],
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -20,12 +20,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Bab\\SimpleFixtures\\": "src/"
+            "Bab\\Datagen\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Bab\\SimpleFixtures\\Tests\\": "tests/"
+            "Bab\\Datagen\\Tests\\": "tests/"
         }
     },
     "scripts": {

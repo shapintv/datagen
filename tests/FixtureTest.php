@@ -1,11 +1,11 @@
 <?php
 
-namespace Bab\SimpleFixtures\Tests;
+namespace Bab\Datagen\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Bab\SimpleFixtures\Fixture;
-use Bab\SimpleFixtures\Tests\Stub;
+use Bab\Datagen\Fixture;
+use Bab\Datagen\Tests\Stub;
 
 class FixtureTest extends TestCase
 {
@@ -17,8 +17,8 @@ class FixtureTest extends TestCase
     }
 
     /**
-     * @expectedException Bab\SimpleFixtures\Exception\NoTableNameDefinedException
-     * @expectedExceptionMessage No tableName specified for "Bab\SimpleFixtures\Tests\Stub\WithoutTableNameFixture". Please define $tableName static property.
+     * @expectedException Bab\Datagen\Exception\NoTableNameDefinedException
+     * @expectedExceptionMessage No tableName specified for "Bab\Datagen\Tests\Stub\WithoutTableNameFixture". Please define $tableName static property.
      */
     public function test_fixture_without_name()
     {
