@@ -19,7 +19,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="Simple fixtures full test suite">
+        <testsuite name="Datagen full test suite">
             <directory>tests/</directory>
         </testsuite>
     </testsuites>
