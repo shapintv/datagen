@@ -2,7 +2,7 @@
     "name": "odolbeau/datagen",
     "description": "A simple lib to deal with data.",
     "keywords": ["fixtures","database","dbal","symfony"],
-    "type": "library",
+    "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {
