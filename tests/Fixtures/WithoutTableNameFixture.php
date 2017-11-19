@@ -1,6 +1,6 @@
 <?php
 
-namespace Bab\Datagen\Tests\Stub;
+namespace Bab\Datagen\Tests\Fixtures;
 
 use Bab\Datagen\Fixture;
 
