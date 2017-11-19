@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Bab\Datagen\Tests\Fixtures;
 
-use Bab\Datagen\Fixture;
+use Bab\Datagen\DBAL\Fixture;
 
 class BasicFixture extends Fixture
 {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\Tests;
+namespace Bab\Datagen\Tests\DBAL;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Bab\Datagen\Fixture;
+use Bab\Datagen\DBAL\Fixture;
 use Bab\Datagen\Tests\Fixtures;
 
 class FixtureTest extends TestCase

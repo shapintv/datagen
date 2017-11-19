@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\ApplicationTester;
 
-class FixturesLoadCommandTest extends KernelTestCase
+class DBALSchemaCreateCommandTest extends KernelTestCase
 {
     public function testExecute()
     {
@@ -19,8 +19,9 @@ class FixturesLoadCommandTest extends KernelTestCase
         $application->setAutoExit(false);
 
         $tester = new ApplicationTester($application);
-        $tester->run(['command' => 'datagen:fixtures:load']);
+        $tester->run(['command' => 'datagen:dbal:schema:create']);
 
-        $this->assertSame("Coucou\n", $tester->getDisplay());
+        $this->assertSame(0, $tester->getStatusCode());
+        $this->assertContains("[OK] Schema created successfully.", $tester->getDisplay());
     }
 }

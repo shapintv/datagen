@@ -41,5 +41,6 @@ cs-lint: ## Lint php code source
 	@vendor/bin/php-cs-fixer fix src/ --dry-run --diff --rules=@Symfony
 
 test: cs-lint ## Launch tests
+	@rm -rf ./tests/Fixtures/app/cache/*
 	@$(call say_cyan,"==\> Launch unit tests")
 	@vendor/bin/phpunit

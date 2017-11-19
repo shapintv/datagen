@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen;
+namespace Bab\Datagen\DBAL;
 
 use Bab\Datagen\Exception\NoTableNameDefinedException;
 
