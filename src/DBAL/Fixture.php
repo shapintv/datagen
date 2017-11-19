@@ -6,11 +6,12 @@ namespace Bab\Datagen\DBAL;
 
 use Bab\Datagen\Exception\NoTableNameDefinedException;
 
-abstract class Fixture
+abstract class Fixture implements FixtureInterface
 {
     protected static $tableName;
+    protected static $order = 50;
 
-    abstract public function getData(): array;
+    abstract public function getRows(): array;
 
     public static function getTableName(): string
     {
@@ -19,5 +20,10 @@ abstract class Fixture
         }
 
         return static::$tableName;
+    }
+
+    public static function getOrder(): int
+    {
+        return static::$order;
     }
 }

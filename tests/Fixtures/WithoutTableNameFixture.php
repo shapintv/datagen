@@ -8,7 +8,7 @@ use Bab\Datagen\DBAL\Fixture;
 
 class WithoutTableNameFixture extends Fixture
 {
-    public function getData(): array
+    public function getRows(): array
     {
         return [
             ['row1', 'columnA', 2, 3, 123.30],

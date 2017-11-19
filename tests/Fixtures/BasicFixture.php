@@ -10,7 +10,7 @@ class BasicFixture extends Fixture
 {
     protected static $tableName = 'basic_stub_fixture';
 
-    public function getData(): array
+    public function getRows(): array
     {
         return [
             ['row1', 'columnA', 2, 3, 123.30],
