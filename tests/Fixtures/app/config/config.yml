@@ -1,0 +1,15 @@
+framework:
+    secret: 'odolbeau.fr'
+    test: ~
+    session:
+        storage_id: 'session.storage.mock_file'
+
+doctrine:
+    dbal:
+        driver: 'pdo_sqlite'
+        path: '%kernel.cache_dir%/db.sqlite'
+        charset: 'UTF8'
+
+services:
+    logger:
+        class: Psr\Log\NullLogger
