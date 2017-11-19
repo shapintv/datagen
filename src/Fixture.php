@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bab\Datagen;
 
 use Bab\Datagen\Exception\NoTableNameDefinedException;
