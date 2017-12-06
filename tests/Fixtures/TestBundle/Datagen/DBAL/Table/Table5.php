@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Bab\Datagen\Tests\Fixtures\TestBundle\Datagen\DBAL\Table;
 
 use Bab\Datagen\DBAL\Table;

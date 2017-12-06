@@ -6,6 +6,11 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+env:
+    global:
+        - COMPOSER_FLAGS=""
+        - CHECK_PHP_SYNTAX="no"
+
 matrix:
   include:
     - php: 7.1
@@ -14,6 +19,8 @@ matrix:
       env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
     - php: 7.2
       env: DEPENDENCIES=beta
+    - php: 7.2
+      env: CHECK_PHP_SYNTAX="yes"
 
 before_install:
   - if [ "$DEPENDENCIES" = "beta" ]; then composer config minimum-stability beta; fi;
@@ -25,4 +32,5 @@ install:
   - composer update --prefer-dist --no-progress --no-suggest $COMPOSER_FLAGS --ansi
 
 script:
-    ./vendor/bin/phpunit
+    - if [[ "$CHECK_PHP_SYNTAX" == "no" ]]; then ./vendor/bin/phpunit; fi;
+    - if [[ "$CHECK_PHP_SYNTAX" == "yes" ]]; then ./vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction -v; fi;

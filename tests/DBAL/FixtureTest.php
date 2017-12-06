@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Bab\Datagen\Tests\DBAL;
 
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Bab\Datagen\DBAL\Fixture;
 use Bab\Datagen\Tests\Fixtures;
 
 class FixtureTest extends TestCase
@@ -19,7 +17,7 @@ class FixtureTest extends TestCase
     }
 
     /**
-     * @expectedException Bab\Datagen\Exception\NoTableNameDefinedException
+     * @expectedException \Bab\Datagen\Exception\NoTableNameDefinedException
      * @expectedExceptionMessage No tableName specified for "Bab\Datagen\Tests\Fixtures\WithoutTableNameFixture". Please define $tableName static property.
      */
     public function test_fixture_without_name()
