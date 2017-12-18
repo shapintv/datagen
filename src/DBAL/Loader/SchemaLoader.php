@@ -34,7 +34,7 @@ class SchemaLoader
                 \RecursiveIteratorIterator::LEAVES_ONLY
             );
         } elseif (is_file($path)) {
-            $iterator = new \ArrayIterator([new \SplFileInfo($fileName)]);
+            $iterator = new \ArrayIterator([new \SplFileInfo($path)]);
         } else {
             return;
         }
