@@ -13,7 +13,7 @@ class FixtureLoaderTest extends TestCase
     {
         $fixtureLoader = new FixtureLoader();
 
-        $fixtureLoader->load(__DIR__ . '/../../Fixtures/TestBundle/Datagen/DBAL/Fixtures');
+        $fixtureLoader->load(__DIR__.'/../../Fixtures/TestBundle/Datagen/DBAL/Fixtures');
 
         $fixtures = $fixtureLoader->getFixtures();
         $this->assertCount(9, $fixtures);

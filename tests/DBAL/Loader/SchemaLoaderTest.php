@@ -14,7 +14,7 @@ class SchemaLoaderTest extends TestCase
     {
         $schemaLoader = new SchemaLoader(new Schema());
 
-        $schemaLoader->load(__DIR__ . '/../../Fixtures/TestBundle/Datagen/DBAL/Table');
+        $schemaLoader->load(__DIR__.'/../../Fixtures/TestBundle/Datagen/DBAL/Table');
 
         $tables = $schemaLoader->getSchema()->getTables();
 

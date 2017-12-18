@@ -22,6 +22,6 @@ class DBALSchemaCreateCommandTest extends KernelTestCase
         $tester->run(['command' => 'datagen:dbal:schema:create']);
 
         $this->assertSame(0, $tester->getStatusCode());
-        $this->assertContains("[OK] Schema created successfully.", $tester->getDisplay());
+        $this->assertContains('[OK] Schema created successfully.', $tester->getDisplay());
     }
 }

@@ -34,11 +34,11 @@ install: ## Install project
 	@composer install -n
 
 cs-fix: ## Fix coding standard
-	@vendor/bin/php-cs-fixer fix src/ --rules=@Symfony
+	@vendor/bin/php-cs-fixer fix
 
 cs-lint: ## Lint php code source
 	@$(call say_cyan,"==\> Check style")
-	@vendor/bin/php-cs-fixer fix src/ --dry-run --diff --rules=@Symfony
+	@vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction -v
 
 test: cs-lint ## Launch tests
 	@rm -rf ./tests/Fixtures/app/cache/*
