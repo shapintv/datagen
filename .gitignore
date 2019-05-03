@@ -1,5 +1,4 @@
 /vendor/
+/tests/app/var/
 /composer.lock
 /.php_cs.cache
-/tests/Fixtures/app/cache/*
-/tests/Fixtures/app/logs/*

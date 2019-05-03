@@ -17,10 +17,6 @@ define say_yellow =
     echo "\033[33m$1\033[0m"
 endef
 
-define say_cyan =
-    echo "\033[1m\033[36m$1\033[0m\033[21m"
-endef
-
 help:
 	@$(call say_yellow,"Usage:")
 	@$(call say,"  make [command]")
@@ -30,14 +26,14 @@ help:
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[32m%s\033[0m___%s\n", $$1, $$2}' | column -ts___
 
 install: ## Install project
-	@$(call say_cyan,"==\> Install Composer dependencies")
+	@$(call say_green,"==\> Install Composer dependencies")
 	@composer install -n
 
 cs-fix: ## Fix coding standard
 	@vendor/bin/php-cs-fixer fix
 
 cs-lint: ## Lint php code source
-	@$(call say_cyan,"==\> Check style")
+	@$(call say_green,"==\> Check style")
 	@vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction -v
 
 phpstan: ## Run PHPStan
@@ -45,5 +41,5 @@ phpstan: ## Run PHPStan
 
 test: cs-lint phpstan ## Launch tests
 	@rm -rf ./tests/Fixtures/app/cache/*
-	@$(call say_cyan,"==\> Launch unit tests")
+	@$(call say_green,"==\> Launch unit tests")
 	@vendor/bin/phpunit
