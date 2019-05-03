@@ -1,17 +1,19 @@
 # Datagen
 
-[![Build Status](https://travis-ci.org/odolbeau/datagen.png)](https://travis-ci.org/odolbeau/datagen)
-[![Latest Stable Version](https://poser.pugx.org/odolbeau/datagen/v/stable.svg)](https://packagist.org/packages/odolbeau/datagen)
-[![Latest Unstable Version](https://poser.pugx.org/odolbeau/datagen/v/unstable.svg)](https://packagist.org/packages/odolbeau/datagen)
+[![Latest Version](https://img.shields.io/github/release/shapintv/datagen.svg?style=flat-square)](https://github.com/shapintv/datagen/releases)
+[![Build Status](https://img.shields.io/travis/shapintv/datagen.svg?style=flat-square)](https://travis-ci.com/shapintv/datagen)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/shapintv/datagen.svg?style=flat-square)](https://scrutinizer-ci.com/g/shapintv/datagen)
+[![Quality Score](https://img.shields.io/scrutinizer/g/shapintv/datagen.svg?style=flat-square)](https://scrutinizer-ci.com/g/shapintv/datagen)
+[![Total Downloads](https://img.shields.io/packagist/dt/shapin/datagen.svg?style=flat-square)](https://packagist.org/packages/shapin/datagen)
 
 Datagen is a PHP library to deal with DB creation and fixtures loading.
 
 ## Installation
 
 The recommended way to install Datagen is through
-[Composer](http://getcomposer.org/). Require the `odolbeau/datagen` package:
+[Composer](http://getcomposer.org/). Require the `shapin/datagen` package:
 
-    $ composer require odolbeau/datagen
+    $ composer require shapin/datagen
 
 ## License
 

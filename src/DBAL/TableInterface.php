@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\DBAL;
+namespace Shapin\Datagen\DBAL;
 
 use Doctrine\DBAL\Schema\Schema;
 

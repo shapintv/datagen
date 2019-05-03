@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\Tests\Fixtures;
+namespace Shapin\Datagen\Tests\Fixtures;
 
-use Bab\Datagen\DBAL\Fixture;
+use Shapin\Datagen\DBAL\Fixture;
 
 class WithoutTableNameFixture extends Fixture
 {

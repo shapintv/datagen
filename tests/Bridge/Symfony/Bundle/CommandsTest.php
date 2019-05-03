@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\Tests\Bridge\Symfony\Bundle;
+namespace Shapin\Datagen\Tests\Bridge\Symfony\Bundle;
 
 use Doctrine\DBAL\Exception\TableNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Console\Application;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\Bridge\Symfony\Bundle\Command;
+namespace Shapin\Datagen\Bridge\Symfony\Bundle\Command;
 
-use Bab\Datagen\DBAL\Loader\SchemaLoader;
+use Shapin\Datagen\DBAL\Loader\SchemaLoader;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\Console\Command\Command;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\DBAL\Loader;
+namespace Shapin\Datagen\DBAL\Loader;
 
-use Bab\Datagen\DBAL\TableInterface;
+use Shapin\Datagen\DBAL\TableInterface;
 use Doctrine\DBAL\Schema\Schema;
 
 /**

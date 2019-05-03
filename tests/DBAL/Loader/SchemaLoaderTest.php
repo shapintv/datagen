@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\Tests\DBAL\Loader;
+namespace Shapin\Datagen\Tests\DBAL\Loader;
 
-use Bab\Datagen\DBAL\Loader\SchemaLoader;
+use Shapin\Datagen\DBAL\Loader\SchemaLoader;
 use Doctrine\DBAL\Schema\Schema;
 use PHPUnit\Framework\TestCase;
 

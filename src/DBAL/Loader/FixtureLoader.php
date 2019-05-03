@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\DBAL\Loader;
+namespace Shapin\Datagen\DBAL\Loader;
 
-use Bab\Datagen\DBAL\FixtureInterface;
+use Shapin\Datagen\DBAL\FixtureInterface;
 
 /**
  * @see https://github.com/doctrine/data-fixtures/blob/master/lib/Doctrine/Common/DataFixtures/Loader.php

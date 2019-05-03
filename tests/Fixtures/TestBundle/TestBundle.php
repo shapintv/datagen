@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\Tests\Fixtures\TestBundle;
+namespace Shapin\Datagen\Tests\Fixtures\TestBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

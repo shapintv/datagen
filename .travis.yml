@@ -9,27 +9,35 @@ cache:
 env:
     global:
         - COMPOSER_FLAGS=""
-        - MODE="test" # Allowed values: [test, syntax]
+        - MODE="test" # Allowed values: [test, syntax, coverage]
+        - TEST_COMMAND="composer test"
+
+php:
+    - 7.2
+    - 7.3
 
 matrix:
+    fast_finish: true
     include:
-        - php: 7.1
-          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
         - php: 7.2
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
         - php: 7.2
           env: DEPENDENCIES=beta
         - php: 7.2
-          env: MODE="syntax"
+          env: MODE="syntax" TEST_COMMAND="composer syntax"
+        - php: 7.3
+          env: MODE="coverage" TEST_COMMAND="composer coverage"
 
 before_install:
     - if [ "$DEPENDENCIES" = "beta" ]; then composer config minimum-stability beta; fi;
-    - phpenv config-rm xdebug.ini || echo "xdebug not available"
-    - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-    - export PATH="$PATH:$HOME/.composer/vendor/bin"
+    - if [[ $MODE != "coverage" ]]; then phpenv config-rm xdebug.ini || true; fi
 
 install:
-    - composer update --prefer-dist --no-progress --no-suggest $COMPOSER_FLAGS --ansi
+    - travis_retry composer update --prefer-dist --no-progress --no-suggest $COMPOSER_FLAGS --ansi
 
 script:
-    - if [[ "$MODE" == "syntax" ]]; then ./vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction -v; fi;
-    - if [[ "$MODE" == "test" ]]; then ./vendor/bin/phpunit; fi;
+    - $TEST_COMMAND
+
+after_success:
+    - if [[ $MODE = "coverage" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+    - if [[ $MODE = "coverage" ]]; then php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml; fi

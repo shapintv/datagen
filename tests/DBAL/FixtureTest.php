@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\Tests\DBAL;
+namespace Shapin\Datagen\Tests\DBAL;
 
 use PHPUnit\Framework\TestCase;
-use Bab\Datagen\Tests\Fixtures;
+use Shapin\Datagen\Tests\Fixtures;
 
 class FixtureTest extends TestCase
 {
@@ -17,8 +17,8 @@ class FixtureTest extends TestCase
     }
 
     /**
-     * @expectedException \Bab\Datagen\Exception\NoTableNameDefinedException
-     * @expectedExceptionMessage No tableName specified for "Bab\Datagen\Tests\Fixtures\WithoutTableNameFixture". Please define $tableName static property.
+     * @expectedException \Shapin\Datagen\Exception\NoTableNameDefinedException
+     * @expectedExceptionMessage No tableName specified for "Shapin\Datagen\Tests\Fixtures\WithoutTableNameFixture". Please define $tableName static property.
      */
     public function test_fixture_without_name()
     {

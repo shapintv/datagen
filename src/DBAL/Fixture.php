@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\DBAL;
+namespace Shapin\Datagen\DBAL;
 
-use Bab\Datagen\Exception\NoTableNameDefinedException;
+use Shapin\Datagen\Exception\NoTableNameDefinedException;
 
 abstract class Fixture implements FixtureInterface
 {

@@ -1,5 +1,5 @@
 framework:
-    secret: 'odolbeau.fr'
+    secret: 'ShapinRocks!'
     test: ~
     session:
         storage_id: 'session.storage.mock_file'
@@ -10,7 +10,7 @@ doctrine:
         path: '%kernel.cache_dir%/db.sqlite'
         charset: 'UTF8'
 
-datagen:
+shapin_datagen:
     groups:
         default: '%kernel.project_dir%/../Fixtures/TestBundle/Datagen/DBAL'
 

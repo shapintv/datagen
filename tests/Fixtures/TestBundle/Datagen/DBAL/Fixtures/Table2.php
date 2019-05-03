@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\Tests\Fixtures\TestBundle\Datagen\DBAL\Fixtures;
+namespace Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen\DBAL\Fixtures;
 
-use Bab\Datagen\DBAL\Fixture;
+use Shapin\Datagen\DBAL\Fixture;
 
 class Table2 extends Fixture
 {

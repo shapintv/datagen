@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\Bridge\Symfony\Bundle\Command;
+namespace Shapin\Datagen\Bridge\Symfony\Bundle\Command;
 
-use Bab\Datagen\DBAL\Loader\FixtureLoader;
+use Shapin\Datagen\DBAL\Loader\FixtureLoader;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

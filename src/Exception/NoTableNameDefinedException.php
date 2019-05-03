@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Bab\Datagen\Exception;
+namespace Shapin\Datagen\Exception;
 
 class NoTableNameDefinedException extends \Exception
 {

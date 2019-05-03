@@ -12,8 +12,8 @@ class Kernel extends BaseKernel
         return array(
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Bab\Datagen\Bridge\Symfony\Bundle\DatagenBundle(),
-            new Bab\Datagen\Tests\Fixtures\TestBundle\TestBundle(),
+            new Shapin\Datagen\Bridge\Symfony\Bundle\ShapinDatagenBundle(),
+            new Shapin\Datagen\Tests\Fixtures\TestBundle\TestBundle(),
         );
     }
 

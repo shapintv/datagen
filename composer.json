@@ -1,6 +1,6 @@
 {
-    "name": "odolbeau/datagen",
-    "description": "A simple lib to deal with data.",
+    "name": "shapin/datagen",
+    "description": "A simple lib to deal with fixtures.",
     "keywords": ["fixtures","database","dbal","symfony"],
     "type": "symfony-bundle",
     "license": "MIT",
@@ -25,18 +25,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Bab\\Datagen\\": "src/"
+            "Shapin\\Datagen\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Bab\\Datagen\\Tests\\": "tests/"
+            "Shapin\\Datagen\\Tests\\": "tests/"
         }
     },
     "scripts": {
-        "test": [
-            "phpunit --colors=always"
-        ]
+        "coverage": "vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml",
+        "syntax": "vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction -v",
+        "test": "vendor/bin/phpunit"
     },
     "extra": {
         "branch-alias": {
