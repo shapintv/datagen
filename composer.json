@@ -21,7 +21,9 @@
         "symfony/framework-bundle": "^3.3|^4.0",
         "symfony/yaml": "^3.3|^4.0",
         "friendsofphp/php-cs-fixer": "^2.14",
-        "phpstan/phpstan": "^0.11.5"
+        "phpstan/phpstan": "^0.11.5",
+        "symfony/phpunit-bridge": "^3.3|^4.0",
+        "phpstan/phpstan-symfony": "^0.11.5"
     },
     "autoload": {
         "psr-4": {

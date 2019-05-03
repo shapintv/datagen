@@ -24,6 +24,8 @@ class Kernel extends BaseKernel
 
     public function getProjectDir()
     {
-        return $this->getRootDir();
+        $r = new \ReflectionObject($this);
+
+        return \dirname($r->getFileName());
     }
 }

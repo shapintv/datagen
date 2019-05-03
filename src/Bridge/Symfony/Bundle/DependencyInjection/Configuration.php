@@ -14,8 +14,17 @@ final class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('bab_datagen');
+        $treeBuilder = new TreeBuilder('datagen');
+
+        $treeBuilder->getRootNode()
+            ->children()
+                ->arrayNode('groups')
+                    ->isRequired()
+                    ->requiresAtLeastOneElement()
+                    ->scalarPrototype()->end()
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

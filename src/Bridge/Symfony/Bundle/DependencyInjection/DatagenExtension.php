@@ -21,5 +21,10 @@ final class DatagenExtension extends Extension
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        $definition = $container->getDefinition('bab.datagen.command.dbal_schema_create');
+        $definition->replaceArgument(1, $config['groups']);
+        $definition = $container->getDefinition('bab.datagen.command.dbal_fixtures_load');
+        $definition->replaceArgument(1, $config['groups']);
     }
 }

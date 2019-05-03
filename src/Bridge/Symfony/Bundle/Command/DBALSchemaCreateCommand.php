@@ -7,18 +7,20 @@ namespace Bab\Datagen\Bridge\Symfony\Bundle\Command;
 use Bab\Datagen\DBAL\Loader\SchemaLoader;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class DBALSchemaCreateCommand extends ContainerAwareCommand
+class DBALSchemaCreateCommand extends Command
 {
+    private $groups;
     private $connection;
 
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection, array $groups)
     {
         $this->connection = $connection;
+        $this->groups = $groups;
 
         parent::__construct();
     }
@@ -41,15 +43,8 @@ class DBALSchemaCreateCommand extends ContainerAwareCommand
         $io = new SymfonyStyle($input, $output);
         $io->title('Create database schema with DBAL.');
 
-        $rootDir = $this->getContainer()->getParameter('kernel.root_dir');
-        $bundles = $this->getContainer()->getParameter('kernel.bundles');
-        $paths = [$rootDir.'/Datagen/DBAL/Fixtures'];
-        foreach ($bundles as $name => $path) {
-            $paths[] = $path.'/Datagen/DBAL/Fixtures';
-        }
-
         $schemaLoader = new SchemaLoader(new Schema());
-        foreach ($paths as $path) {
+        foreach ($this->groups as $path) {
             $schemaLoader->load($path);
         }
 

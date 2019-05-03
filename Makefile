@@ -40,6 +40,6 @@ phpstan: ## Run PHPStan
 	@vendor/bin/phpstan analyze -c phpstan.neon -l max src/ tests/
 
 test: cs-lint phpstan ## Launch tests
-	@rm -rf ./tests/Fixtures/app/cache/*
+	@rm -rf ./tests/app/var
 	@$(call say_green,"==\> Launch unit tests")
 	@vendor/bin/phpunit

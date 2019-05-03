@@ -10,6 +10,10 @@ doctrine:
         path: '%kernel.cache_dir%/db.sqlite'
         charset: 'UTF8'
 
+datagen:
+    groups:
+        default: '%kernel.project_dir%/../Fixtures/TestBundle/Datagen/DBAL'
+
 services:
     logger:
         class: Psr\Log\NullLogger

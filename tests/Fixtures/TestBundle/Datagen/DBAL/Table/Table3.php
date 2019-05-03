@@ -20,7 +20,7 @@ class Table3 extends Table
 
         $table->addColumn('uuid', 'string');
         $table->addColumn('field3', 'string', ['length' => 50]);
-        $table->addColumn('created_at', 'bigint', ['unsigned' => true]);
+        $table->addColumn('created_at', 'bigint', ['unsigned' => true, 'notnull' => false]);
 
         $table->setPrimaryKey(['uuid']);
         $table->addIndex(['field3']);

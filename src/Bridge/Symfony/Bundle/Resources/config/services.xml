@@ -8,11 +8,13 @@
 
         <service id="bab.datagen.command.dbal_schema_create" class="Bab\Datagen\Bridge\Symfony\Bundle\Command\DBALSchemaCreateCommand">
             <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument type="collection"></argument>
             <tag name="console.command" />
         </service>
 
         <service id="bab.datagen.command.dbal_fixtures_load" class="Bab\Datagen\Bridge\Symfony\Bundle\Command\DBALFixturesLoadCommand">
             <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument type="collection"></argument>
             <tag name="console.command" />
         </service>
 

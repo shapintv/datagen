@@ -19,8 +19,8 @@ class Table1 extends Table
         $table = $schema->createTable('table1');
 
         $table->addColumn('uuid', 'string');
-        $table->addColumn('field1', 'string', ['length' => 50, 'nullable' => true]);
-        $table->addColumn('created_at', 'bigint', ['unsigned' => true, 'nullable' => true]);
+        $table->addColumn('field1', 'string', ['length' => 50, 'notnull' => false]);
+        $table->addColumn('created_at', 'bigint', ['unsigned' => true, 'notnull' => false]);
 
         $table->setPrimaryKey(['uuid']);
         $table->addIndex(['field1']);
