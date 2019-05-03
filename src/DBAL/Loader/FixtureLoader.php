@@ -28,7 +28,7 @@ class FixtureLoader
 
         $includedFiles = [];
         foreach ($iterator as $file) {
-            if (($fileName = $file->getBasename('.php')) === $file->getBasename()) {
+            if ($file->getBasename('.php') === $file->getBasename()) {
                 continue;
             }
             $sourceFile = realpath($file->getPathName());
