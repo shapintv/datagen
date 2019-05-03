@@ -36,10 +36,7 @@ cs-lint: ## Lint php code source
 	@$(call say_green,"==\> Check style")
 	@vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction -v
 
-phpstan: ## Run PHPStan
-	@vendor/bin/phpstan analyze -c phpstan.neon -l max src/ tests/
-
-test: cs-lint phpstan ## Launch tests
-	@rm -rf ./tests/app/var
+test: cs-lint ## Launch tests
+	@rm -rf ./tests/app/var ./tests/app/cache
 	@$(call say_green,"==\> Launch unit tests")
 	@vendor/bin/phpunit

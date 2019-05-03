@@ -9,7 +9,7 @@ cache:
 env:
     global:
         - COMPOSER_FLAGS=""
-        - MODE="test" # Allowed values: [test, syntax, phpstan]
+        - MODE="test" # Allowed values: [test, syntax]
 
 matrix:
     include:
@@ -21,8 +21,6 @@ matrix:
           env: DEPENDENCIES=beta
         - php: 7.2
           env: MODE="syntax"
-        - php: 7.2
-          env: MODE="phpstan"
 
 before_install:
     - if [ "$DEPENDENCIES" = "beta" ]; then composer config minimum-stability beta; fi;
@@ -35,5 +33,4 @@ install:
 
 script:
     - if [[ "$MODE" == "syntax" ]]; then ./vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction -v; fi;
-    - if [[ "$MODE" == "phpstan" ]]; then ./vendor/bin/phpstan analyze -c phpstan.neon -l max src/ tests/; fi;
     - if [[ "$MODE" == "test" ]]; then ./vendor/bin/phpunit; fi;

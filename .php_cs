@@ -5,7 +5,7 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->ignoreDotFiles(true)
     ->ignoreVCS(true)
-    ->exclude(['tests/app/var'])
+    ->exclude(['tests/app/var', 'tests/app/cache'])
     ->files()
     ->name('*.php')
 ;
