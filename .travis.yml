@@ -31,8 +31,6 @@ before_install:
     - export PATH="$PATH:$HOME/.composer/vendor/bin"
 
 install:
-    - if [[ "$MODE" == "syntax" ]]; then composer require --dev --no-update friendsofphp/php-cs-fixer; fi;
-    - if [[ "$MODE" == "phpstan" ]]; then composer require --dev --no-update phpstan/phpstan; fi;
     - composer update --prefer-dist --no-progress --no-suggest $COMPOSER_FLAGS --ansi
 
 script:
