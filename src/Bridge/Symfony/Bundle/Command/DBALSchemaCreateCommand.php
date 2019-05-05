@@ -17,11 +17,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class DBALSchemaCreateCommand extends Command
 {
     private $groups;
+    private $fixtureLoader;
     private $connection;
 
-    public function __construct(Connection $connection, array $groups)
+    public function __construct(Connection $connection, FixtureLoader $fixtureLoader, array $groups)
     {
         $this->connection = $connection;
+        $this->fixtureLoader = $fixtureLoader;
         $this->groups = $groups;
 
         parent::__construct();
@@ -71,12 +73,11 @@ class DBALSchemaCreateCommand extends Command
 
         $io->success('Schema created successfully.');
 
-        $fixtureLoader = new FixtureLoader();
         foreach ($groups as $path) {
-            $fixtureLoader->load($path);
+            $this->fixtureLoader->load($path);
         }
 
-        foreach ($fixtureLoader->getFixtures() as $fixture) {
+        foreach ($this->fixtureLoader->getFixtures() as $fixture) {
             $this->connection->insert($fixture[0], $fixture[1]);
         }
 

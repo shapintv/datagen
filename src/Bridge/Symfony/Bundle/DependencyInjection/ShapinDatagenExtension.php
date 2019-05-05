@@ -23,6 +23,6 @@ final class ShapinDatagenExtension extends Extension
         $loader->load('services.xml');
 
         $definition = $container->getDefinition('shapin.datagen.command.dbal_schema_create');
-        $definition->replaceArgument(1, $config['groups']);
+        $definition->replaceArgument(2, $config['groups']);
     }
 }
