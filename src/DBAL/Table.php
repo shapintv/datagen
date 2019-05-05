@@ -28,7 +28,7 @@ abstract class Table implements TableInterface
         return static::$tableName;
     }
 
-    public function getRows(): array
+    public function getRows(): iterable
     {
         return [];
     }

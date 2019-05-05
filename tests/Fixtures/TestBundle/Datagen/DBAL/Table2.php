@@ -30,7 +30,7 @@ class Table2 extends Table
     /**
      * {@inheritdoc}
      */
-    public function getRows(): array
+    public function getRows(): iterable
     {
         return [
             ['uuid' => 'uuid2_1'],
