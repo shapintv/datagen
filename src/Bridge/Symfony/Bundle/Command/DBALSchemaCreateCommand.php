@@ -78,7 +78,7 @@ class DBALSchemaCreateCommand extends Command
         }
 
         foreach ($this->fixtureLoader->getFixtures() as $fixture) {
-            $this->connection->insert($fixture[0], $fixture[1]);
+            $this->connection->insert($fixture[0], $fixture[1], $fixture[2]);
         }
 
         $io->success('Fixtures created successfully.');

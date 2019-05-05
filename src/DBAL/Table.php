@@ -32,4 +32,9 @@ abstract class Table implements TableInterface
     {
         return [];
     }
+
+    public function getTypes(): array
+    {
+        return [];
+    }
 }

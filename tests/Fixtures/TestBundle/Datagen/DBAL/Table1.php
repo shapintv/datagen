@@ -32,8 +32,19 @@ class Table1 extends Table
      */
     public function getRows(): iterable
     {
-        yield ['uuid' => 'uuid1_1'];
-        yield ['uuid' => 'uuid1_2'];
-        yield ['uuid' => 'uuid1_3'];
+        $date = new \Datetime('@0');
+        yield ['uuid' => 'uuid1_1', 'created_at' => $date];
+        yield ['uuid' => 'uuid1_2', 'created_at' => $date];
+        yield ['uuid' => 'uuid1_3', 'created_at' => $date];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTypes(): array
+    {
+        return [
+            'created_at' => 'datetimetz',
+        ];
     }
 }

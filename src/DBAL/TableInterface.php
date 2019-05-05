@@ -15,4 +15,6 @@ interface TableInterface
     public static function getTableName(): string;
 
     public function getRows(): iterable;
+
+    public function getTypes(): array;
 }

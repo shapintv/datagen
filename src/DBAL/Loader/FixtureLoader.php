@@ -62,9 +62,10 @@ class FixtureLoader
 
         foreach ($fixtures as $fixture) {
             $tableName = $fixture->getTableName();
+            $types = $fixture->getTypes();
 
             foreach ($fixture->getRows() as $row) {
-                $this->fixtures[] = [$tableName, $row];
+                $this->fixtures[] = [$tableName, $row, $types];
             }
         }
     }
