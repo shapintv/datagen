@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Shapin\Datagen\DBAL\Loader;
 
-use Shapin\Datagen\DBAL\FixtureInterface;
+use Shapin\Datagen\DBAL\TableInterface;
 
 /**
  * @see https://github.com/doctrine/data-fixtures/blob/master/lib/Doctrine/Common/DataFixtures/Loader.php
@@ -87,6 +87,6 @@ class FixtureLoader
             return true;
         }
 
-        return !$rc->implementsInterface(FixtureInterface::class);
+        return !$rc->implementsInterface(TableInterface::class);
     }
 }

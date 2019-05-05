@@ -24,7 +24,5 @@ final class ShapinDatagenExtension extends Extension
 
         $definition = $container->getDefinition('shapin.datagen.command.dbal_schema_create');
         $definition->replaceArgument(1, $config['groups']);
-        $definition = $container->getDefinition('shapin.datagen.command.dbal_fixtures_load');
-        $definition->replaceArgument(1, $config['groups']);
     }
 }

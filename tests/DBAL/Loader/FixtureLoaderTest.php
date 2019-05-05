@@ -13,7 +13,7 @@ class FixtureLoaderTest extends TestCase
     {
         $fixtureLoader = new FixtureLoader();
 
-        $fixtureLoader->load(__DIR__.'/../../Fixtures/TestBundle/Datagen/DBAL/Fixtures');
+        $fixtureLoader->load(__DIR__.'/../../Fixtures/TestBundle/Datagen/DBAL');
 
         $fixtures = $fixtureLoader->getFixtures();
         $this->assertCount(9, $fixtures);
@@ -22,12 +22,12 @@ class FixtureLoaderTest extends TestCase
             ['table1', ['uuid' => 'uuid1_1']],
             ['table1', ['uuid' => 'uuid1_2']],
             ['table1', ['uuid' => 'uuid1_3']],
-            ['table3', ['uuid' => 'uuid3_1', 'field3' => 'another_field']],
-            ['table3', ['uuid' => 'uuid3_2', 'field3' => 'another_field']],
-            ['table3', ['uuid' => 'uuid3_3', 'field3' => 'another_field']],
             ['table2', ['uuid' => 'uuid2_1']],
             ['table2', ['uuid' => 'uuid2_2']],
             ['table2', ['uuid' => 'uuid2_3']],
+            ['table3', ['uuid' => 'uuid3_1', 'field3' => 'another_field']],
+            ['table3', ['uuid' => 'uuid3_2', 'field3' => 'another_field']],
+            ['table3', ['uuid' => 'uuid3_3', 'field3' => 'another_field']],
         ];
 
         $this->assertEquals($expectedFixtures, $fixtures);

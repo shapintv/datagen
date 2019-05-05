@@ -9,6 +9,7 @@ use Doctrine\DBAL\Schema\Schema;
 
 class Table1 extends Table
 {
+    protected static $tableName = 'table1';
     protected static $order = 10;
 
     /**
@@ -16,7 +17,7 @@ class Table1 extends Table
      */
     public function addTableToSchema(Schema $schema)
     {
-        $table = $schema->createTable('table1');
+        $table = $schema->createTable(self::$tableName);
 
         $table->addColumn('uuid', 'string');
         $table->addColumn('field1', 'string', ['length' => 50, 'notnull' => false]);
@@ -24,5 +25,17 @@ class Table1 extends Table
 
         $table->setPrimaryKey(['uuid']);
         $table->addIndex(['field1']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRows(): array
+    {
+        return [
+            ['uuid' => 'uuid1_1'],
+            ['uuid' => 'uuid1_2'],
+            ['uuid' => 'uuid1_3'],
+        ];
     }
 }

@@ -11,4 +11,8 @@ interface TableInterface
     public function addTableToSchema(Schema $schema);
 
     public static function getOrder(): int;
+
+    public static function getTableName(): string;
+
+    public function getRows(): array;
 }

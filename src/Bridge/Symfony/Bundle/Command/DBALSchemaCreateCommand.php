@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shapin\Datagen\Bridge\Symfony\Bundle\Command;
 
 use Shapin\Datagen\DBAL\Loader\SchemaLoader;
+use Shapin\Datagen\DBAL\Loader\FixtureLoader;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
 use Symfony\Component\Console\Command\Command;
@@ -69,5 +70,16 @@ class DBALSchemaCreateCommand extends Command
         }
 
         $io->success('Schema created successfully.');
+
+        $fixtureLoader = new FixtureLoader();
+        foreach ($groups as $path) {
+            $fixtureLoader->load($path);
+        }
+
+        foreach ($fixtureLoader->getFixtures() as $fixture) {
+            $this->connection->insert($fixture[0], $fixture[1]);
+        }
+
+        $io->success('Fixtures created successfully.');
     }
 }
