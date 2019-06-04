@@ -19,7 +19,9 @@ class Loader
             if (!isset($this->groups[$group])) {
                 $this->groups[$group] = [];
             }
-            $this->groups[$group][] = $table->getTableName();
+            if (!in_array($table->getTableName(), $this->groups[$group])) {
+                $this->groups[$group][] = $table->getTableName();
+            }
         }
     }
 
