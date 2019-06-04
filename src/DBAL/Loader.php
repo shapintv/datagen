@@ -46,6 +46,11 @@ class Loader
         }
     }
 
+    public function getGroups(): array
+    {
+        return $this->groups;
+    }
+
     private function getTables(array $groups, array $excludeGroups): array
     {
         $duplicatedGroups = array_intersect($groups, $excludeGroups);
