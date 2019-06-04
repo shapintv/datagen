@@ -27,7 +27,7 @@ class Loader
     {
         $schema = new Schema();
 
-        foreach ($this->getTables() as $table) {
+        foreach ($this->getTables($groups) as $table) {
             $table->addTableToSchema($schema);
         }
 
@@ -46,10 +46,15 @@ class Loader
         }
     }
 
+    public function getGroups(): array
+    {
+        return array_keys($this->groups);
+    }
+
     private function getTables(array $groups = []): array
     {
         // Check that all groups exists.
-        foreach ($groups as $groups) {
+        foreach ($groups as $group) {
             if (!isset($this->groups[$group])) {
                 throw new \InvalidArgumentException(sprintf('Unknown group %s. Available: [%s]', $group, implode(', ', array_keys($this->groups))));
             }

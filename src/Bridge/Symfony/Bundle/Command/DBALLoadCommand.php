@@ -34,6 +34,7 @@ class DBALLoadCommand extends Command
             ->setName('shapin:datagen:dbal:load')
             ->setDescription('Load the DBAL schema.')
             ->addOption('groups', 'g', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which groups should be loaded? (default: all)')
+            ->addOption('exclude-groups', 'G', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which groups should be excluded? (default: none)')
             ->addOption('schema-only', null, InputOption::VALUE_NONE, 'Load only schema.')
             ->addOption('fixtures-only', null, InputOption::VALUE_NONE, 'Load only fixtures.')
         ;
@@ -47,7 +48,14 @@ class DBALLoadCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->title('Create database schema with DBAL.');
 
-        $groups = $input->getOption('groups', []);
+        $groups = [] !== $input->getOption('groups') ? $input->getOption('groups') : $this->loader->getGroups();
+        $groups = array_diff($groups, $input->getOption('exclude-groups', []));
+
+        if (0 === count($groups) && 0 < count($this->loader->getGroups())) {
+            $io->warning('No group to load.');
+
+            return;
+        }
 
         if (!$input->getOption('fixtures-only')) {
             $statements = $this->loader->getSchema($groups)->toSql($this->connection->getDatabasePlatform());
