@@ -20,7 +20,7 @@ class CommandsTest extends KernelTestCase
 
         $tester = new ApplicationTester($application);
 
-        $tester->run(['command' => 'datagen:dbal:schema:create']);
+        $tester->run(['command' => 'shapin:datagen:dbal:load']);
         $this->assertSame(0, $tester->getStatusCode());
         $this->assertContains('[OK] Schema created successfully.', $tester->getDisplay());
         $this->assertContains('[OK] Fixtures created successfully.', $tester->getDisplay());

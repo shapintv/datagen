@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen\DBAL\Table;
+namespace Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen\DBAL;
 
 use Shapin\Datagen\DBAL\Table;
 use Doctrine\DBAL\Schema\Schema;
