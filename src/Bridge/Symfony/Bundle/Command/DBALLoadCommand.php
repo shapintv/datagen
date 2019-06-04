@@ -48,17 +48,11 @@ class DBALLoadCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->title('Create database schema with DBAL.');
 
-        $groups = [] !== $input->getOption('groups') ? $input->getOption('groups') : $this->loader->getGroups();
-        $groups = array_diff($groups, $input->getOption('exclude-groups', []));
-
-        if (0 === count($groups) && 0 < count($this->loader->getGroups())) {
-            $io->warning('No group to load.');
-
-            return;
-        }
+        $groups = $input->getOption('groups');
+        $excludeGroups = $input->getOption('exclude-groups');
 
         if (!$input->getOption('fixtures-only')) {
-            $statements = $this->loader->getSchema($groups)->toSql($this->connection->getDatabasePlatform());
+            $statements = $this->loader->getSchema($groups, $excludeGroups)->toSql($this->connection->getDatabasePlatform());
             foreach ($statements as $statement) {
                 $this->connection->query($statement);
             }
@@ -67,7 +61,7 @@ class DBALLoadCommand extends Command
         }
 
         if (!$input->getOption('schema-only')) {
-            foreach ($this->loader->getFixtures($groups) as $fixture) {
+            foreach ($this->loader->getFixtures($groups, $excludeGroups) as $fixture) {
                 $this->connection->insert($fixture[0], $fixture[1], $fixture[2]);
             }
 
