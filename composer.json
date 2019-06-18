@@ -21,7 +21,11 @@
         "symfony/framework-bundle": "^3.4|^4.0",
         "symfony/yaml": "^3.4|^4.0",
         "friendsofphp/php-cs-fixer": "^2.14",
-        "symfony/phpunit-bridge": "^3.4|^4.0"
+        "symfony/phpunit-bridge": "^3.4|^4.0",
+        "shapin/stripe": "dev-master"
+    },
+    "suggest": {
+        "shapin/stripe": "Needed to load Stripe fixtures"
     },
     "autoload": {
         "psr-4": {

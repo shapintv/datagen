@@ -22,9 +22,15 @@ class Datagen
     public function load(array $groups = [], array $excludeGroups = [], array $options = []): void
     {
         $fixtures = $this->loader->getFixtures($groups, $excludeGroups);
+        $wantedProcessor = isset($options['processor']) ? $options['processor'] : null;
 
         foreach ($fixtures as $fixture) {
-            $processorOptions = $options[$fixture->getProcessor()] ?: [];
+            // Ignore this fixture if it doesn't depends on the wanted processor.
+            if (null !== $wantedProcessor && $wantedProcessor !== $fixture->getProcessor()) {
+                continue;
+            }
+
+            $processorOptions = isset($options[$fixture->getProcessor()]) ? $options[$fixture->getProcessor()] : [];
 
             $this->getProcessor($fixture->getProcessor())->process($fixture, $processorOptions);
         }
