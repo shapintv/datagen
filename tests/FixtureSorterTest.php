@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Shapin\Datagen\Tests;
 
 use Shapin\Datagen\FixtureSorter;
-use Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen\DBAL as Tables;
+use Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen as Table;
 use PHPUnit\Framework\TestCase;
 
 class FixtureSorterTest extends TestCase
@@ -13,12 +13,12 @@ class FixtureSorterTest extends TestCase
     public function testOrder()
     {
         $tables = [
-            new Tables\Table6(),
-            new Tables\Table3(),
-            new Tables\Table5(),
-            new Tables\Table1(),
-            new Tables\Table2(),
-            new Tables\Table4(),
+            new Table\Table6(),
+            new Table\Table3(),
+            new Table\Table5(),
+            new Table\Table1(),
+            new Table\Table2(),
+            new Table\Table4(),
         ];
         $sortedTables = (new FixtureSorter())->sort($tables);
 

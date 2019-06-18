@@ -12,8 +12,16 @@ doctrine:
 
 shapin_datagen:
     groups:
-        default: '%kernel.project_dir%/../Fixtures/TestBundle/Datagen/DBAL'
+        default: '%kernel.project_dir%/../Fixtures/TestBundle/Datagen'
 
 services:
+    Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen\:
+        autowire: true
+        autoconfigure: true
+        resource: '../Fixtures/TestBundle/Datagen/*'
+        public: false
+        tags:
+            - { name: 'shapin_datagen.fixture' }
+
     logger:
         class: Psr\Log\NullLogger

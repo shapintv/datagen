@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen\DBAL;
+namespace Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen;
 
 use Shapin\Datagen\DBAL\Table;
 use Doctrine\DBAL\Schema\Schema;
 
-class Table2 extends Table
+class Table3 extends Table
 {
-    protected static $tableName = 'table2';
-    protected static $order = 20;
+    protected static $tableName = 'table3';
+    protected static $order = 30;
 
     /**
      * {@inheritdoc}
@@ -20,11 +20,11 @@ class Table2 extends Table
         $table = $schema->createTable(self::$tableName);
 
         $table->addColumn('uuid', 'string');
-        $table->addColumn('field2', 'string', ['length' => 50, 'notnull' => false]);
+        $table->addColumn('field3', 'string', ['length' => 50]);
         $table->addColumn('created_at', 'bigint', ['unsigned' => true, 'notnull' => false]);
 
         $table->setPrimaryKey(['uuid']);
-        $table->addIndex(['field2']);
+        $table->addIndex(['field3']);
     }
 
     /**
@@ -33,9 +33,9 @@ class Table2 extends Table
     public function getRows(): iterable
     {
         return [
-            ['uuid' => 'uuid2_1'],
-            ['uuid' => 'uuid2_2'],
-            ['uuid' => 'uuid2_3'],
+            ['uuid' => 'uuid3_1', 'field3' => 'another_field'],
+            ['uuid' => 'uuid3_2', 'field3' => 'another_field'],
+            ['uuid' => 'uuid3_3', 'field3' => 'another_field'],
         ];
     }
 }

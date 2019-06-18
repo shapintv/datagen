@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Shapin\Datagen\Tests\DBAL\Processor;
 
-use Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen\DBAL as Table;
+use Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen as Table;
 use Shapin\Datagen\DBAL\Processor;
 use Shapin\Datagen\Loader;
 use PHPUnit\Framework\TestCase;
