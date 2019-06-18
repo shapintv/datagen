@@ -37,19 +37,19 @@ class Loader
         $groups = [];
 
         foreach ($this->groups as $name => $fixtures) {
-            if (!in_array($name, $groups)) {
-                $groups[$name] = [];
-            }
+            $groupFixtures = [];
 
             foreach ($fixtures as $fixtureUniqueKey) {
-                $groups[$name][$fixtureUniqueKey] = $this->fixtures[$fixtureUniqueKey];
+                $groupFixtures[] = $this->fixtures[$fixtureUniqueKey];
             }
+
+            $groups[$name] = $this->fixtureSorter->sort($groupFixtures);
         }
 
         return $groups;
     }
 
-    public function getFixtures(array $groups, array $excludeGroups): array
+    public function getFixtures(array $groups = [], array $excludeGroups = []): array
     {
         $duplicatedGroups = array_intersect($groups, $excludeGroups);
         if (0 < count($duplicatedGroups)) {
