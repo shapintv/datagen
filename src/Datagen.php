@@ -36,7 +36,9 @@ class Datagen
         }
 
         foreach ($this->processors as $processor) {
-            $processor->flush($options[$fixture->getProcessor()] ?: []);
+            $processorOptions = isset($options[$fixture->getProcessor()]) ? $options[$fixture->getProcessor()] : [];
+
+            $processor->flush($processorOptions);
         }
     }
 
