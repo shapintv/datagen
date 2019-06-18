@@ -6,18 +6,13 @@ namespace Shapin\Datagen\DBAL;
 
 use Doctrine\DBAL\Schema\Schema;
 use Shapin\Datagen\Exception\NoTableNameDefinedException;
+use Shapin\Datagen\Fixture;
 
-abstract class Table implements TableInterface
+abstract class Table extends Fixture implements TableInterface
 {
     protected static $tableName;
-    protected static $order = 50;
 
     abstract public function addTableToSchema(Schema $schema);
-
-    public function getOrder(): int
-    {
-        return static::$order;
-    }
 
     public static function getTableName(): string
     {
@@ -36,5 +31,15 @@ abstract class Table implements TableInterface
     public function getTypes(): array
     {
         return [];
+    }
+
+    public function getProcessor(): string
+    {
+        return 'dbal';
+    }
+
+    public function getName(): string
+    {
+        return self::getTableName();
     }
 }

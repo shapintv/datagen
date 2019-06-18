@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Shapin\Datagen\Bridge\Symfony\Bundle\Command;
 
-use Shapin\Datagen\DBAL\Loader;
+use Shapin\Datagen\Loader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class DebugDBALCommand extends Command
+class DebugCommand extends Command
 {
     private $connection;
 
@@ -27,8 +27,8 @@ class DebugDBALCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('shapin:datagen:debug:dbal')
-            ->setDescription('Display information about DBAL schema.')
+            ->setName('shapin:datagen:debug')
+            ->setDescription('Display information about fixtures.')
         ;
     }
 
@@ -38,11 +38,15 @@ class DebugDBALCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $io = new SymfonyStyle($input, $output);
-        $io->title('Repartition of tables by groups.');
+        $io->title('Repartition of fixtures by groups.');
 
-        foreach ($this->loader->getGroups() as $group => $tables) {
+        foreach ($this->loader->getFixturesByGroups() as $group => $fixtures) {
+            $content = [];
+            foreach ($fixtures as $fixture) {
+                $content[] = "<comment>{$fixture->getOrder()}</comment> - <info>[{$fixture->getProcessor()}]</info> - {$fixture->getName()}";
+            }
             $io->section($group);
-            $io->listing($tables);
+            $io->listing($content);
         }
     }
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Shapin\Datagen\Bridge\Symfony\Bundle\Command;
 
-use Shapin\Datagen\DBAL\Loader;
+use Shapin\Datagen\DBAL\Processor;
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,12 +15,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class DBALLoadCommand extends Command
 {
     private $connection;
-    private $loader;
+    private $processor;
 
-    public function __construct(Connection $connection, Loader $loader)
+    public function __construct(Connection $connection, Processor $processor)
     {
         $this->connection = $connection;
-        $this->loader = $loader;
+        $this->processor = $processor;
 
         parent::__construct();
     }
@@ -52,7 +52,7 @@ class DBALLoadCommand extends Command
         $excludeGroups = $input->getOption('exclude-groups');
 
         if (!$input->getOption('fixtures-only')) {
-            $statements = $this->loader->getSchema($groups, $excludeGroups)->toSql($this->connection->getDatabasePlatform());
+            $statements = $this->processor->getSchema($groups, $excludeGroups)->toSql($this->connection->getDatabasePlatform());
             foreach ($statements as $statement) {
                 $this->connection->query($statement);
             }
@@ -61,7 +61,7 @@ class DBALLoadCommand extends Command
         }
 
         if (!$input->getOption('schema-only')) {
-            foreach ($this->loader->getFixtures($groups, $excludeGroups) as $fixture) {
+            foreach ($this->processor->getFixtures($groups, $excludeGroups) as $fixture) {
                 $this->connection->insert($fixture[0], $fixture[1], $fixture[2]);
             }
 

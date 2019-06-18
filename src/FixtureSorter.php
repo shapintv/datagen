@@ -10,7 +10,7 @@ class FixtureSorter
     {
         // Order all tables
         usort($fixtures, function ($a, $b) {
-            if (!$a instanceof OrderedFixture || !$b instanceof OrderedFixture) {
+            if (!$a instanceof FixtureInterface || !$b instanceof FixtureInterface) {
                 throw new \InvalidArgumentException('Unable to sort fixtures which do not implement OrderedFixture.');
             }
 

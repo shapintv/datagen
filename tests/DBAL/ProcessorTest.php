@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Shapin\Datagen\Tests\DBAL\Loader;
+namespace Shapin\Datagen\Tests\DBAL\Processor;
 
 use Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen\DBAL as Table;
-use Shapin\Datagen\DBAL\Loader;
+use Shapin\Datagen\DBAL\Processor;
+use Shapin\Datagen\Loader;
 use PHPUnit\Framework\TestCase;
 
-class LoaderTest extends TestCase
+class ProcessorTest extends TestCase
 {
     public function test_getSchema()
     {
-        $tables = $this->getLoader()->getSchema()->getTables();
+        $tables = $this->getProcessor()->getSchema()->getTables();
 
         $this->assertCount(6, $tables);
 
@@ -26,7 +27,7 @@ class LoaderTest extends TestCase
 
     public function test_getSchema_forGivenGroup()
     {
-        $tables = $this->getLoader()->getSchema(['group2'])->getTables();
+        $tables = $this->getProcessor()->getSchema(['group2'])->getTables();
 
         $this->assertCount(3, $tables);
 
@@ -40,7 +41,7 @@ class LoaderTest extends TestCase
 
     public function test_getSchema_WithExcludeGroup()
     {
-        $tables = $this->getLoader()->getSchema([], ['group2'])->getTables();
+        $tables = $this->getProcessor()->getSchema([], ['group2'])->getTables();
 
         $this->assertCount(3, $tables);
 
@@ -54,14 +55,14 @@ class LoaderTest extends TestCase
 
     public function test_getSchema_withEverythingExcluded()
     {
-        $tables = $this->getLoader()->getSchema([], ['group1', 'group2'])->getTables();
+        $tables = $this->getProcessor()->getSchema([], ['group1', 'group2'])->getTables();
 
         $this->assertCount(0, $tables);
     }
 
     public function test_getFixtures()
     {
-        $fixtures = iterator_to_array($this->getLoader()->getFixtures());
+        $fixtures = iterator_to_array($this->getProcessor()->getFixtures());
         $this->assertCount(9, $fixtures);
 
         $date = new \Datetime('@0');
@@ -85,26 +86,28 @@ class LoaderTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('You can\'t both select & ignore a given group. Errored: ["group1"]');
-        $this->getLoader()->getSchema(['group1'], ['group1']);
+        $this->getProcessor()->getSchema(['group1'], ['group1']);
     }
 
     public function test_getSchemaWithUnknwonGroup()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Unknown group "group42". Available: ["group1", "group2"]');
-        $this->getLoader()->getSchema(['group42']);
+        $this->getProcessor()->getSchema(['group42']);
     }
 
-    private function getLoader()
+    private function getProcessor()
     {
         $loader = new Loader();
-        $loader->addTable(new Table\Table1(), ['group1']);
-        $loader->addTable(new Table\Table2(), ['group1']);
-        $loader->addTable(new Table\Table3(), ['group1']);
-        $loader->addTable(new Table\Table4(), ['group2']);
-        $loader->addTable(new Table\Table5(), ['group2']);
-        $loader->addTable(new Table\Table6(), ['group1', 'group2']);
+        $loader->addFixture(new Table\Table1(), ['group1']);
+        $loader->addFixture(new Table\Table2(), ['group1']);
+        $loader->addFixture(new Table\Table3(), ['group1']);
+        $loader->addFixture(new Table\Table4(), ['group2']);
+        $loader->addFixture(new Table\Table5(), ['group2']);
+        $loader->addFixture(new Table\Table6(), ['group1', 'group2']);
 
-        return $loader;
+        $processor = new Processor($loader);
+
+        return $processor;
     }
 }
