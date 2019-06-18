@@ -23,5 +23,8 @@ services:
         tags:
             - { name: 'shapin_datagen.fixture' }
 
+    Shapin\Stripe\StripeClient:
+        arguments: ['@httplug.client.mock']
+
     logger:
         class: Psr\Log\NullLogger
