@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Shapin\Datagen\DBAL;
 
 use Doctrine\DBAL\Schema\Schema;
-use Shapin\Datagen\Exception\NoTableNameDefinedException;
 use Shapin\Datagen\Fixture;
+use Shapin\Datagen\DBAL\Exception\NoTableNameDefinedException;
 
 abstract class Table extends Fixture implements TableInterface
 {
