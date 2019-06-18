@@ -30,8 +30,8 @@ class LoadCommand extends Command
         $this
             ->setName('shapin:datagen:load')
             ->setDescription('Load the world!')
-            ->addOption('groups', 'g', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which groups should be loaded? (default: all)')
-            ->addOption('exclude-groups', 'G', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which groups should be excluded? (default: none)')
+            ->addOption('group', 'g', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which groups should be loaded? (default: all)')
+            ->addOption('exclude-group', 'G', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which groups should be excluded? (default: none)')
             ->addOption('dbal-schema-only', null, InputOption::VALUE_NONE, '[DBAL] Load only schema.')
             ->addOption('dbal-fixtures-only', null, InputOption::VALUE_NONE, '[DBAL] Load only fixtures.')
             ->addOption('processor', 'p', InputOption::VALUE_REQUIRED, 'Load only fixtures related to given processor.')
@@ -47,8 +47,8 @@ class LoadCommand extends Command
 
         $io->title('Load the world! \o/');
 
-        $groups = $input->getOption('groups');
-        $excludeGroups = $input->getOption('exclude-groups');
+        $groups = $input->getOption('group');
+        $excludeGroups = $input->getOption('exclude-group');
 
         $options = [
             'dbal' => [
