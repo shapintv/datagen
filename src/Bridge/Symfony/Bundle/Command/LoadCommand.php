@@ -33,7 +33,8 @@ class LoadCommand extends Command
             ->addOption('groups', 'g', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which groups should be loaded? (default: all)')
             ->addOption('exclude-groups', 'G', InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Which groups should be excluded? (default: none)')
             ->addOption('dbal-schema-only', null, InputOption::VALUE_NONE, '[DBAL] Load only schema.')
-            ->addOption('dbal-fixtures-only', null, InputOption::VALUE_NONE, '[DBAL) Load only fixtures.')
+            ->addOption('dbal-fixtures-only', null, InputOption::VALUE_NONE, '[DBAL] Load only fixtures.')
+            ->addOption('processor', 'p', InputOption::VALUE_REQUIRED, 'Load only fixtures related to given processor.')
         ;
     }
 
@@ -49,12 +50,17 @@ class LoadCommand extends Command
         $groups = $input->getOption('groups');
         $excludeGroups = $input->getOption('exclude-groups');
 
-        $this->datagen->load($groups, $excludeGroups, [
+        $options = [
             'dbal' => [
                 'schema_only' => $input->getOption('dbal-schema-only'),
                 'fixtures_only' => $input->getOption('dbal-fixtures-only'),
             ],
-        ]);
+        ];
+        if (null !== $processor = $input->getOption('processor')) {
+            $options['processor'] = $processor;
+        }
+
+        $this->datagen->load($groups, $excludeGroups, $options);
 
         $io->success('Job DONE!');
     }
