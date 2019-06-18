@@ -4,48 +4,83 @@ declare(strict_types=1);
 
 namespace Shapin\Datagen\DBAL;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
-use Shapin\Datagen\Loader;
+use Shapin\Datagen\FixtureInterface;
+use Shapin\Datagen\ProcessorInterface;
 
-class Processor
+class Processor implements ProcessorInterface
 {
-    private $loader;
+    private $connection;
+    private $schema;
 
-    public function __construct(Loader $loader)
+    private $fixturesToLoad = [];
+
+    public function __construct(Connection $connection)
     {
-        $this->loader = $loader;
+        $this->connection = $connection;
+        $this->schema = new Schema();
     }
 
-    public function getSchema(array $groups = [], array $excludeGroups = []): Schema
+    /**
+     * {@inheritdoc}
+     */
+    public function process(FixtureInterface $fixture, array $options = []): void
     {
-        $fixtures = $this->loader->getFixtures($groups, $excludeGroups);
-
-        $schema = new Schema();
-
-        foreach ($fixtures as $fixture) {
-            if ($fixture instanceof TableInterface) {
-                $fixture->addTableToSchema($schema);
-            }
+        if (!$fixture instanceof TableInterface) {
+            return;
         }
 
-        return $schema;
+        if (!$this->resolveOption($options, 'fixtures_only', false)) {
+            $fixture->addTableToSchema($this->schema);
+        }
+
+        if (!$this->resolveOption($options, 'schema_only', false)) {
+            $this->fixturesToLoad[] = $fixture;
+        }
     }
 
-    public function getFixtures(array $groups = [], array $excludeGroups = []): iterable
+    /**
+     * {@inheritdoc}
+     */
+    public function flush(array $options = []): void
     {
-        $fixtures = $this->loader->getFixtures($groups, $excludeGroups);
-
-        foreach ($fixtures as $fixture) {
-            if (!$fixture instanceof TableInterface) {
-                continue;
+        if (!$this->resolveOption($options, 'fixtures_only', false)) {
+            $statements = $this->schema->toSql($this->connection->getDatabasePlatform());
+            foreach ($statements as $statement) {
+                $this->connection->query($statement);
             }
 
-            $tableName = $fixture->getTableName();
-            $types = $fixture->getTypes();
+            // Reset schema
+            $this->schema = new Schema();
+        }
 
-            foreach ($fixture->getRows() as $row) {
-                yield [$tableName, $row, $types];
+        if (!$this->resolveOption($options, 'schema_only', false)) {
+            foreach ($this->fixturesToLoad as $fixture) {
+                $tableName = $fixture->getTableName();
+                $types = $fixture->getTypes();
+
+                foreach ($fixture->getRows() as $row) {
+                    $this->connection->insert($tableName, $row, $types);
+                }
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName(): string
+    {
+        return 'dbal';
+    }
+
+    private function resolveOption(array $options, string $key, $defaultValue = null)
+    {
+        if (!array_key_exists($key, $options)) {
+            return $defaultValue;
+        }
+
+        return $options[$key];
     }
 }

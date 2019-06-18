@@ -6,15 +6,24 @@
 
     <services>
 
-        <service id="Shapin\Datagen\Loader" />
+        <instanceof id="Shapin\Datagen\ProcessorInterface" autowire="true">
+            <tag name="shapin_datagen.processor"/>
+        </instanceof>
 
         <service id="Shapin\Datagen\DBAL\Processor">
-            <argument type="service" id="Shapin\Datagen\Loader" />
+            <argument type="service" id="doctrine.dbal.default_connection" />
+            <tag name="shapin_datagen.processor" />
         </service>
 
-        <service id="Shapin\Datagen\Bridge\Symfony\Bundle\Command\DBALLoadCommand">
-            <argument type="service" id="doctrine.dbal.default_connection" />
-            <argument type="service" id="Shapin\Datagen\DBAL\Processor" />
+        <service id="Shapin\Datagen\Loader" />
+
+        <service id="Shapin\Datagen\Datagen">
+            <argument type="service" id="Shapin\Datagen\Loader" />
+            <argument type="tagged" tag="shapin_datagen.processor"/>
+        </service>
+
+        <service id="Shapin\Datagen\Bridge\Symfony\Bundle\Command\LoadCommand">
+            <argument type="service" id="Shapin\Datagen\Datagen" />
             <tag name="console.command" />
         </service>
 
