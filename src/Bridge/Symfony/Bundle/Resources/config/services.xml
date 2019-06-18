@@ -10,16 +10,6 @@
             <tag name="shapin_datagen.processor"/>
         </instanceof>
 
-        <service id="Shapin\Datagen\DBAL\Processor">
-            <argument type="service" id="doctrine.dbal.default_connection" />
-            <tag name="shapin_datagen.processor" />
-        </service>
-
-        <service id="Shapin\Datagen\Stripe\Processor">
-            <argument type="service" id="Shapin\Stripe\StripeClient" />
-            <tag name="shapin_datagen.processor" />
-        </service>
-
         <service id="Shapin\Datagen\Loader" />
 
         <service id="Shapin\Datagen\Datagen">
