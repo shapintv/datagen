@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Shapin\Datagen;
 
-use Shapin\Exception\UnknwonProcessorException;
+use Shapin\Datagen\Exception\UnknownProcessorException;
 
 class Datagen
 {
@@ -43,7 +43,7 @@ class Datagen
     private function getProcessor(string $name): ProcessorInterface
     {
         if (!array_key_exists($name, $this->processors)) {
-            throw new UnknwonProcessorException($name);
+            throw new UnknownProcessorException($name);
         }
 
         return $this->processors[$name];
