@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Shapin\Datagen\DBAL;
 
+use Shapin\Datagen\OrderedFixture;
 use Doctrine\DBAL\Schema\Schema;
 
-interface TableInterface
+interface TableInterface extends OrderedFixture
 {
     public function addTableToSchema(Schema $schema);
-
-    public static function getOrder(): int;
 
     public static function getTableName(): string;
 

@@ -14,7 +14,7 @@ abstract class Table implements TableInterface
 
     abstract public function addTableToSchema(Schema $schema);
 
-    public static function getOrder(): int
+    public function getOrder(): int
     {
         return static::$order;
     }

@@ -5,11 +5,19 @@ declare(strict_types=1);
 namespace Shapin\Datagen\DBAL;
 
 use Doctrine\DBAL\Schema\Schema;
+use Shapin\Datagen\FixtureSorter;
 
 class Loader
 {
+    private $fixtureSorter;
+
     private $tables = [];
     private $groups = [];
+
+    public function __construct(FixtureSorter $fixtureSorter = null)
+    {
+        $this->fixtureSorter = $fixtureSorter ?? new FixtureSorter();
+    }
 
     public function addTable(Table $table, array $groups = []): void
     {
@@ -88,14 +96,7 @@ class Loader
             }
         }
 
-        // Order all tables
-        usort($tables, function ($a, $b) {
-            if ($a->getOrder() === $b->getOrder()) {
-                return 0;
-            }
-
-            return $a->getOrder() < $b->getOrder() ? -1 : 1;
-        });
+        $tables = $this->fixtureSorter->sort($tables);
 
         return $tables;
     }
