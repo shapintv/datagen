@@ -6,6 +6,7 @@ namespace Shapin\Datagen;
 
 use Shapin\Datagen\Exception\DuplicateReferenceException;
 use Shapin\Datagen\Exception\UnknownReferenceException;
+use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ReferenceManager
@@ -33,15 +34,6 @@ class ReferenceManager
         $this->references[$fixture][$name] = $data;
     }
 
-    public function get(string $fixture, string $name)
-    {
-        if (!isset($this->references[$fixture][$name])) {
-            throw new UnknownReferenceException($fixture, $name);
-        }
-
-        return $this->references[$fixture][$name];
-    }
-
     public function findAndReplace(array $data): array
     {
         $keys = array_keys($data);
@@ -67,6 +59,10 @@ class ReferenceManager
 
         $ref = $parts[1];
 
-        return $propertyAccessor->getValue($this->references, $ref);
+        try {
+            return $propertyAccessor->getValue($this->references, $ref);
+        } catch (NoSuchPropertyException $e) {
+            throw new UnknownReferenceException("Unable to resolve Reference \"$value\".", 0, $e);
+        }
     }
 }

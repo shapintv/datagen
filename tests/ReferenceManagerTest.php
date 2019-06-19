@@ -8,16 +8,9 @@ use PHPUnit\Framework\TestCase;
 use Shapin\Datagen\Exception\DuplicateReferenceException;
 use Shapin\Datagen\Exception\UnknownReferenceException;
 use Shapin\Datagen\ReferenceManager;
-use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 
 class ReferenceManagerTest extends TestCase
 {
-    public function testGet()
-    {
-        $reference = $this->getReferenceManager()->get('table1', 'my_awesome_row_1');
-        $this->assertSame(['id' => 1, 'key' => 'value'], (array) $reference);
-    }
-
     public function testFindAndReplace()
     {
         $data = [
@@ -37,8 +30,8 @@ class ReferenceManagerTest extends TestCase
 
     public function testFindAndReplaceWithUnknownProperty()
     {
-        $this->expectException(NoSuchPropertyException::class);
-        $this->expectExceptionMessage('Neither the property "foobar" nor one of the methods "getFoobar()", "foobar()", "isFoobar()", "hasFoobar()", "__get()" exist and have public access in class "ArrayObject".');
+        $this->expectException(UnknownReferenceException::class);
+        $this->expectExceptionMessage('Unable to resolve Reference "REF:table1.my_awesome_row_2.foobar".');
 
         $this->getReferenceManager()->findAndReplace([
             'table1_id' => 'REF:table1.my_awesome_row_2.foobar',
@@ -51,14 +44,6 @@ class ReferenceManagerTest extends TestCase
         $this->expectExceptionMessage('Duplicate reference "my_awesome_row_1" for fixture "table1".');
 
         $this->getReferenceManager()->add('table1', 'my_awesome_row_1', []);
-    }
-
-    public function testUnknownReferenceThrowError()
-    {
-        $this->expectException(UnknownReferenceException::class);
-        $this->expectExceptionMessage('Unknown reference "bar" for fixture "foo".');
-
-        $this->getReferenceManager()->get('foo', 'bar');
     }
 
     private function getReferenceManager(): ReferenceManager
