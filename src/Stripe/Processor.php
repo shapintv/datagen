@@ -63,12 +63,28 @@ class Processor implements ProcessorInterface
     private function getApi(FixtureInterface $fixture): HttpApi
     {
         switch ($fixture->getObjectName()) {
+            case 'account':
+                return $this->stripeClient->accounts();
+            case 'charge':
+                return $this->stripeClient->charges();
             case 'coupon':
                 return $this->stripeClient->coupons();
+            case 'customer':
+                return $this->stripeClient->customers();
             case 'plan':
                 return $this->stripeClient->plans();
             case 'product':
                 return $this->stripeClient->products();
+            case 'refund':
+                return $this->stripeClient->refunds();
+            case 'source':
+                return $this->stripeClient->sources();
+            case 'subscription':
+                return $this->stripeClient->subscriptions();
+            case 'tax_rate':
+                return $this->stripeClient->taxRates();
+            case 'transfer':
+                return $this->stripeClient->transfers();
 
             default:
                 throw new UnknownObjectException($fixture->getObjectName());
