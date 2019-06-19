@@ -64,10 +64,12 @@ class Processor implements ProcessorInterface
                 $types = $fixture->getTypes();
 
                 foreach ($fixture->getRows() as $key => $row) {
-                    $this->connection->insert($tableName, $this->referenceManager->findAndReplace($row), $types);
+                    $data = $this->referenceManager->findAndReplace($row);
+
+                    $this->connection->insert($tableName, $data, $types);
 
                     if (is_string($key)) {
-                        $this->referenceManager->add($tableName, $key, $row);
+                        $this->referenceManager->add($tableName, $key, $data);
                     }
                 }
             }
