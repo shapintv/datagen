@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": "^7.1",
-        "psr/log": "^1.0"
+        "psr/log": "^1.0",
+        "symfony/property-access": "^3.4|^4.0"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^1.8",

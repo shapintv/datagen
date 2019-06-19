@@ -8,17 +8,20 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
 use Shapin\Datagen\FixtureInterface;
 use Shapin\Datagen\ProcessorInterface;
+use Shapin\Datagen\ReferenceManager;
 
 class Processor implements ProcessorInterface
 {
     private $connection;
+    private $referenceManager;
     private $schema;
 
     private $fixturesToLoad = [];
 
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection, ReferenceManager $referenceManager)
     {
         $this->connection = $connection;
+        $this->referenceManager = $referenceManager;
         $this->schema = new Schema();
     }
 
@@ -60,8 +63,12 @@ class Processor implements ProcessorInterface
                 $tableName = $fixture->getTableName();
                 $types = $fixture->getTypes();
 
-                foreach ($fixture->getRows() as $row) {
-                    $this->connection->insert($tableName, $row, $types);
+                foreach ($fixture->getRows() as $key => $row) {
+                    $this->connection->insert($tableName, $this->referenceManager->findAndReplace($row), $types);
+
+                    if (is_string($key)) {
+                        $this->referenceManager->add($tableName, $key, $row);
+                    }
                 }
             }
         }

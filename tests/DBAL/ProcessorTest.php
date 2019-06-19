@@ -10,10 +10,12 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen as Table;
 use Shapin\Datagen\DBAL\Processor;
+use Shapin\Datagen\ReferenceManager;
 
 class ProcessorTest extends TestCase
 {
     private $connection;
+    private $referenceManager;
     private $processor;
 
     public function setUp(): void
@@ -21,7 +23,9 @@ class ProcessorTest extends TestCase
         $this->connection = $this->prophesize(Connection::class);
         $this->connection->getDatabasePlatform()->willReturn(new SqlitePlatform());
 
-        $this->processor = new Processor($this->connection->reveal());
+        $this->referenceManager = new ReferenceManager();
+
+        $this->processor = new Processor($this->connection->reveal(), $this->referenceManager);
     }
 
     public function testSchemaAndFixtures()

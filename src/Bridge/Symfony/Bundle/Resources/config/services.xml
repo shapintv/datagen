@@ -11,6 +11,7 @@
         </instanceof>
 
         <service id="Shapin\Datagen\Loader" />
+        <service id="Shapin\Datagen\ReferenceManager" />
 
         <service id="Shapin\Datagen\Datagen">
             <argument type="service" id="Shapin\Datagen\Loader" />

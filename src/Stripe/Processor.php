@@ -6,6 +6,7 @@ namespace Shapin\Datagen\Stripe;
 
 use Shapin\Datagen\FixtureInterface;
 use Shapin\Datagen\ProcessorInterface;
+use Shapin\Datagen\ReferenceManager;
 use Shapin\Datagen\Stripe\Exception\UnknownObjectException;
 use Shapin\Stripe\Api\HttpApi;
 use Shapin\Stripe\Exception\Domain\ResourceAlreadyExistsException;
@@ -14,10 +15,12 @@ use Shapin\Stripe\StripeClient;
 class Processor implements ProcessorInterface
 {
     private $stripeClient;
+    private $referenceManager;
 
-    public function __construct(StripeClient $stripeClient)
+    public function __construct(StripeClient $stripeClient, ReferenceManager $referenceManager)
     {
         $this->stripeClient = $stripeClient;
+        $this->referenceManager = $referenceManager;
     }
 
     /**
@@ -27,11 +30,17 @@ class Processor implements ProcessorInterface
     {
         $api = $this->getApi($fixture);
 
-        foreach ($fixture->getObjects() as $object) {
+        foreach ($fixture->getObjects() as $key => $object) {
+            $object = $this->referenceManager->findAndReplace($object);
+
             try {
-                $api->create($object);
+                $object = $api->create($object);
             } catch (ResourceAlreadyExistsException $e) {
                 // Doing nothing for now
+            }
+
+            if (is_string($key)) {
+                $this->referenceManager->add($fixture->getObjectName(), $key, $object);
             }
         }
     }

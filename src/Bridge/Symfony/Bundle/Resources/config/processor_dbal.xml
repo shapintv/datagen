@@ -8,6 +8,7 @@
 
         <service id="Shapin\Datagen\DBAL\Processor">
             <argument type="service" id="doctrine.dbal.default_connection" />
+            <argument type="service" id="Shapin\Datagen\ReferenceManager" />
             <tag name="shapin_datagen.processor" />
         </service>
 

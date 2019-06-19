@@ -8,6 +8,7 @@
 
         <service id="Shapin\Datagen\Stripe\Processor">
             <argument type="service" id="Shapin\Stripe\StripeClient" />
+            <argument type="service" id="Shapin\Datagen\ReferenceManager" />
             <tag name="shapin_datagen.processor" />
         </service>
 
