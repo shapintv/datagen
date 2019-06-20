@@ -17,12 +17,22 @@ class ReferenceManagerTest extends TestCase
             'key' => 'value',
             'table1_id' => 'REF:table1.my_awesome_row_2.id',
             'foo' => 'bar',
+            'another_key' => [
+                'child' => [
+                    'another_reference' => 'REF:table2.another_row.id',
+                ],
+            ],
         ];
 
         $expectedData = [
             'key' => 'value',
             'table1_id' => 2,
             'foo' => 'bar',
+            'another_key' => [
+                'child' => [
+                    'another_reference' => 42,
+                ],
+            ],
         ];
 
         $this->assertSame($expectedData, $this->getReferenceManager()->findAndReplace($data));

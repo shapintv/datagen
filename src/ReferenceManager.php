@@ -18,7 +18,7 @@ class ReferenceManager
         $this->references = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
     }
 
-    public function add(string $fixture, string $name, array $data): void
+    public function add(string $fixture, string $name, $data): void
     {
         if (!array_key_exists($fixture, $this->references)) {
             $this->references[$fixture] = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
@@ -27,7 +27,7 @@ class ReferenceManager
             throw new DuplicateReferenceException($fixture, $name);
         }
 
-        if (!is_object($data)) {
+        if (is_array($data)) {
             $data = new \ArrayObject($data, \ArrayObject::ARRAY_AS_PROPS);
         }
 
@@ -41,6 +41,9 @@ class ReferenceManager
             $value = $data[$keys[$i]];
             if (is_string($value) && $this->isReference($value)) {
                 $data[$keys[$i]] = $this->resolveReference($value);
+            }
+            if (is_array($value)) {
+                $data[$keys[$i]] = $this->findAndReplace($value);
             }
         }
 
