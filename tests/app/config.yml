@@ -23,8 +23,9 @@ services:
         tags:
             - { name: 'shapin_datagen.fixture' }
 
+    Symfony\Component\HttpClient\MockHttpClient: ~
     Shapin\Stripe\StripeClient:
-        arguments: ['@httplug.client.mock']
+        arguments: ['@Symfony\Component\HttpClient\MockHttpClient']
 
     logger:
         class: Psr\Log\NullLogger

@@ -19,7 +19,7 @@ class CommandsTest extends KernelTestCase
 
         $tester->run(['command' => 'shapin:datagen:load']);
         $this->assertSame(0, $tester->getStatusCode());
-        $this->assertContains('[OK] Job DONE!', $tester->getDisplay());
+        $this->assertStringContainsString('[OK] Job DONE!', $tester->getDisplay());
 
         $this->getConnection()->rollback();
     }
@@ -32,11 +32,11 @@ class CommandsTest extends KernelTestCase
 
         $tester->run(['command' => 'shapin:datagen:load', '--dbal-schema-only' => null]);
         $this->assertSame(0, $tester->getStatusCode());
-        $this->assertContains('[OK] Job DONE!', $tester->getDisplay());
+        $this->assertStringContainsString('[OK] Job DONE!', $tester->getDisplay());
 
         $tester->run(['command' => 'shapin:datagen:load', '--dbal-fixtures-only' => null]);
         $this->assertSame(0, $tester->getStatusCode());
-        $this->assertContains('[OK] Job DONE!', $tester->getDisplay());
+        $this->assertStringContainsString('[OK] Job DONE!', $tester->getDisplay());
 
         $this->getConnection()->rollback();
     }
