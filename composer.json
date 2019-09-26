@@ -13,16 +13,16 @@
     "require": {
         "php": "^7.1",
         "psr/log": "^1.0",
-        "symfony/property-access": "^3.4|^4.0"
+        "symfony/property-access": "^3.4|^4.2"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^1.8",
-        "phpunit/phpunit": "^8.3",
-        "symfony/http-kernel": "^3.4|^4.0",
-        "symfony/framework-bundle": "^3.4|^4.0",
-        "symfony/yaml": "^3.4|^4.0",
+        "phpunit/phpunit": "^7.5",
+        "symfony/http-kernel": "^3.4|^4.2",
+        "symfony/framework-bundle": "^3.4|^4.2",
+        "symfony/yaml": "^3.4|^4.2",
         "friendsofphp/php-cs-fixer": "^2.14",
-        "symfony/phpunit-bridge": "^3.4|^4.0",
+        "symfony/phpunit-bridge": "^4.3",
         "shapin/stripe": "dev-master"
     },
     "suggest": {
