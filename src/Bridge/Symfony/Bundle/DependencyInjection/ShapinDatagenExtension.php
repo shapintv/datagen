@@ -22,10 +22,10 @@ final class ShapinDatagenExtension extends Extension
         $loader->load('services.xml');
 
         if (class_exists(Connection::class)) {
-            $loader->load('processor_dbal.xml');
+            $loader->load('dbal.xml');
         }
         if (class_exists(StripeClient::class)) {
-            $loader->load('processor_stripe.xml');
+            $loader->load('stripe.xml');
         }
     }
 }

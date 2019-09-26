@@ -12,6 +12,11 @@
             <tag name="shapin_datagen.processor" />
         </service>
 
+        <service id="Shapin\Datagen\Bridge\Symfony\Bundle\Command\DatabaseDiffCommand">
+            <argument type="service" id="doctrine.dbal.default_connection" />
+            <tag name="console.command" />
+        </service>
+
     </services>
 
 </container>

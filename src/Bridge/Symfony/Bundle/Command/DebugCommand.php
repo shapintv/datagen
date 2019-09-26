@@ -13,7 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class DebugCommand extends Command
 {
-    private $connection;
+    private $loader;
 
     public function __construct(Loader $loader)
     {
