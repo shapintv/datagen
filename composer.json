@@ -23,11 +23,7 @@
         "symfony/yaml": "^3.4|^4.0",
         "friendsofphp/php-cs-fixer": "^2.14",
         "symfony/phpunit-bridge": "^3.4|^4.0",
-        "shapin/stripe": "dev-master",
-        "php-http/httplug-bundle": "^1.16",
-        "php-http/mock-client": "^1.3",
-        "php-http/message": "^1.7",
-        "php-http/guzzle6-adapter": "^2.0"
+        "shapin/stripe": "dev-master"
     },
     "suggest": {
         "shapin/stripe": "Needed to load Stripe fixtures"
