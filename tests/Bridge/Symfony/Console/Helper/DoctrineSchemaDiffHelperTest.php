@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Shapin\Datagen\Tests\Bridge\Symfony\Console\Helper;
 
-use Doctrine\DBAL\Schema\Comparator;
 use Doctrine\DBAL\Schema\Column;
-use Doctrine\DBAL\Schema\SchemaDiff;
+use Doctrine\DBAL\Schema\Comparator;
 use Doctrine\DBAL\Schema\Schema;
+use Doctrine\DBAL\Schema\SchemaDiff;
 use Doctrine\DBAL\Schema\Table;
 use Doctrine\DBAL\Types\Type;
 use PHPUnit\Framework\TestCase;

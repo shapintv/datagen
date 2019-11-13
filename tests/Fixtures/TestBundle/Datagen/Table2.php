@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen;
 
-use Shapin\Datagen\DBAL\Table;
 use Doctrine\DBAL\Schema\Schema;
+use Shapin\Datagen\DBAL\Table;
 
 class Table2 extends Table
 {

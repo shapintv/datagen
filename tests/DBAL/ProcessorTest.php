@@ -8,9 +8,9 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen as Table;
 use Shapin\Datagen\DBAL\Processor;
 use Shapin\Datagen\ReferenceManager;
+use Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen as Table;
 
 class ProcessorTest extends TestCase
 {

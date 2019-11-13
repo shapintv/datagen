@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Shapin\Datagen\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Shapin\Datagen\FixtureSorter;
 use Shapin\Datagen\Tests\Fixtures\TestBundle\Datagen as Table;
-use PHPUnit\Framework\TestCase;
 
 class FixtureSorterTest extends TestCase
 {
