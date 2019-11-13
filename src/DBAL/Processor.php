@@ -30,15 +30,11 @@ class Processor implements ProcessorInterface
      */
     public function process(FixtureInterface $fixture, array $options = []): void
     {
-        if (!$fixture instanceof TableInterface) {
-            return;
-        }
-
-        if (!$this->resolveOption($options, 'fixtures_only', false)) {
+        if ($fixture instanceof Table && !$this->resolveOption($options, 'fixtures_only', false)) {
             $fixture->addTableToSchema($this->schema);
         }
 
-        if (!$this->resolveOption($options, 'schema_only', false)) {
+        if ($fixture instanceof FixtureCollection && !$this->resolveOption($options, 'schema_only', false)) {
             $this->fixturesToLoad[] = $fixture;
         }
     }
@@ -58,19 +54,18 @@ class Processor implements ProcessorInterface
             $this->schema = new Schema();
         }
 
-        if (!$this->resolveOption($options, 'schema_only', false)) {
-            foreach ($this->fixturesToLoad as $fixture) {
-                $tableName = $fixture->getTableName();
-                $types = $fixture->getTypes();
+        if ($this->resolveOption($options, 'schema_only', false)) {
+            return;
+        }
 
-                foreach ($fixture->getRows() as $key => $row) {
-                    $data = $this->referenceManager->findAndReplace($row);
+        foreach ($this->fixturesToLoad as $fixtureCollection) {
+            foreach ($fixtureCollection->getFixtures() as $key => $fixture) {
+                $fields = $this->referenceManager->findAndReplace($fixture->getFields());
 
-                    $this->connection->insert($tableName, $data, $types);
+                $this->connection->insert($fixture->getTableName(), $fields, $fixture->getTypes());
 
-                    if (is_string($key)) {
-                        $this->referenceManager->add($tableName, $key, $data);
-                    }
+                if (is_string($key)) {
+                    $this->referenceManager->add($fixture->getTableName(), $key, $fields);
                 }
             }
         }

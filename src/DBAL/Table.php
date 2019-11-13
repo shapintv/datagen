@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Shapin\Datagen\DBAL;
 
 use Doctrine\DBAL\Schema\Schema;
-use Shapin\Datagen\Fixture;
 use Shapin\Datagen\DBAL\Exception\NoTableNameDefinedException;
 
-abstract class Table extends Fixture implements TableInterface
+abstract class Table extends FixtureCollection
 {
     protected static $tableName;
 
@@ -23,6 +22,13 @@ abstract class Table extends Fixture implements TableInterface
         return static::$tableName;
     }
 
+    public function getFixtures(): iterable
+    {
+        foreach ($this->getRows() as $key => $fields) {
+            yield $key => new Fixture(self::getTableName(), $fields, $this->getTypes());
+        }
+    }
+
     public function getRows(): iterable
     {
         return [];
@@ -33,11 +39,17 @@ abstract class Table extends Fixture implements TableInterface
         return [];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getProcessor(): string
     {
         return 'dbal';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName(): string
     {
         return self::getTableName();
