@@ -56,5 +56,7 @@ class DatabaseDiffCommand extends Command
 
         $schemaDiffHelper = new DoctrineSchemaDiffHelper($output, $schemaDiff);
         $schemaDiffHelper->render();
+
+        return 0;
     }
 }

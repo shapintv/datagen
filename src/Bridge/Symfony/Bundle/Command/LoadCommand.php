@@ -63,5 +63,7 @@ class LoadCommand extends Command
         $this->datagen->load($groups, $excludeGroups, $options);
 
         $io->success('Job DONE!');
+
+        return 0;
     }
 }

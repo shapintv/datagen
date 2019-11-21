@@ -67,6 +67,8 @@ class DebugCommand extends Command
         $io->title('All fixtures');
 
         $io->listing($this->getListing($this->loader->getFixtures()));
+
+        return 0;
     }
 
     private function getListing(array $fixtures): array
