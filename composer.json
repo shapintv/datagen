@@ -39,7 +39,6 @@
     },
     "scripts": {
         "coverage": "vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml",
-        "syntax": "vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction -v",
         "test": "vendor/bin/phpunit"
     }
 }
