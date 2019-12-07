@@ -35,6 +35,10 @@ class Datagen
             $this->getProcessor($fixture->getProcessor())->process($fixture, $processorOptions);
         }
 
+        if (!isset($fixture)) {
+            return;
+        }
+
         foreach ($this->processors as $processor) {
             $processorOptions = isset($options[$fixture->getProcessor()]) ? $options[$fixture->getProcessor()] : [];
 
@@ -44,7 +48,7 @@ class Datagen
 
     private function getProcessor(string $name): ProcessorInterface
     {
-        if (!array_key_exists($name, $this->processors)) {
+        if (!\array_key_exists($name, $this->processors)) {
             throw new UnknownProcessorException($name);
         }
 

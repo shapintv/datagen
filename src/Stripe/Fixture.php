@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Shapin\Datagen\Stripe;
 
 use Shapin\Datagen\Fixture as BaseFixture;
+use Shapin\Datagen\Stripe\Exception\NoObjectNameDefinedException;
 
 abstract class Fixture extends BaseFixture implements FixtureInterface
 {

@@ -1,6 +1,9 @@
 .PHONY: ${TARGETS}
 .DEFAULT_GOAL := help
 
+DIR := ${CURDIR}
+QA_IMAGE := jakzal/phpqa:php7.3-alpine
+
 define say =
     echo "$1"
 endef
@@ -29,14 +32,16 @@ install: ## Install project
 	@$(call say_green,"==\> Install Composer dependencies")
 	@composer install -n
 
-cs-fix: ## Fix coding standard
-	@vendor/bin/php-cs-fixer fix
+cs-lint: ## Verify check styles
+	@docker run --rm -v $(DIR):/project -w /project $(QA_IMAGE) php-cs-fixer fix --diff-format udiff --dry-run -vvv
 
-cs-lint: ## Lint php code source
-	@$(call say_green,"==\> Check style")
-	@vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction -v
+cs-fix: ## Apply Check styles
+	@docker run --rm -v $(DIR):/project -w /project $(QA_IMAGE) php-cs-fixer fix --diff-format udiff -vvv
 
-test: cs-lint ## Launch tests
+phpstan: ## Run PHPStan
+	@docker run --rm -v $(DIR):/project -w /project $(QA_IMAGE) phpstan analyse
+
+test: cs-lint phpstan ## Launch tests
 	@rm -rf ./tests/app/var ./tests/app/cache
 	@$(call say_green,"==\> Launch unit tests")
 	@vendor/bin/phpunit

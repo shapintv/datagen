@@ -26,7 +26,7 @@ class Loader
             if (!isset($this->groups[$group])) {
                 $this->groups[$group] = [];
             }
-            if (!in_array($key, $this->groups[$group])) {
+            if (!\in_array($key, $this->groups[$group])) {
                 $this->groups[$group][] = $key;
             }
         }
@@ -52,7 +52,7 @@ class Loader
     public function getFixtures(array $groups = [], array $excludeGroups = []): array
     {
         $duplicatedGroups = array_intersect($groups, $excludeGroups);
-        if (0 < count($duplicatedGroups)) {
+        if (0 < \count($duplicatedGroups)) {
             throw new \InvalidArgumentException(sprintf('You can\'t both select & ignore a given group. Errored: ["%s"]', implode('", "', $duplicatedGroups)));
         }
 
@@ -64,7 +64,7 @@ class Loader
         }
 
         // Select all relevant fixtures according to asked groups
-        if (0 === count($groups)) {
+        if (0 === \count($groups)) {
             $fixtures = $this->fixtures;
         } else {
             $fixtures = [];
@@ -78,7 +78,7 @@ class Loader
         // Remove all fixtures to exclude
         foreach ($excludeGroups as $excludeGroup) {
             foreach ($this->groups[$excludeGroup] as $fixtureToExclude) {
-                if (array_key_exists($fixtureToExclude, $fixtures)) {
+                if (\array_key_exists($fixtureToExclude, $fixtures)) {
                     unset($fixtures[$fixtureToExclude]);
                 }
             }

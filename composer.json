@@ -11,18 +11,17 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "psr/log": "^1.0",
-        "symfony/property-access": "^3.4|^4.2|^5.0"
+        "symfony/property-access": "^4.3|^5.0"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^1.8",
-        "phpunit/phpunit": "^7.5",
-        "symfony/http-kernel": "^3.4|^4.2|^5.0",
-        "symfony/framework-bundle": "^3.4|^4.2|^5.0",
-        "symfony/yaml": "^3.4|^4.2|^5.0",
-        "friendsofphp/php-cs-fixer": "^2.14",
-        "symfony/phpunit-bridge": "^4.3",
+        "phpunit/phpunit": "^8.5",
+        "symfony/http-kernel": "^4.3|^5.0",
+        "symfony/framework-bundle": "^4.3|^5.0",
+        "symfony/yaml": "^4.3|^5.0",
+        "symfony/phpunit-bridge": "^4.4|^5.0",
         "shapin/stripe": "dev-master"
     },
     "suggest": {
@@ -40,7 +39,6 @@
     },
     "scripts": {
         "coverage": "vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml",
-        "syntax": "vendor/bin/php-cs-fixer fix --dry-run --diff --no-interaction -v",
         "test": "vendor/bin/phpunit"
     }
 }

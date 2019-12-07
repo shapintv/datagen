@@ -9,7 +9,7 @@ cache:
 env:
     global:
         - COMPOSER_FLAGS=""
-        - MODE="test" # Allowed values: [test, syntax, coverage]
+        - MODE="test" # Allowed values: [test, coverage]
         - TEST_COMMAND="composer test"
 
 php:
@@ -23,8 +23,6 @@ matrix:
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
         - php: 7.3
           env: DEPENDENCIES=beta
-        - php: 7.2
-          env: MODE="syntax" TEST_COMMAND="composer syntax"
         - php: 7.3
           env: MODE="coverage" TEST_COMMAND="composer coverage"
 

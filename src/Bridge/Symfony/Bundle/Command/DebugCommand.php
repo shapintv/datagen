@@ -48,7 +48,7 @@ class DebugCommand extends Command
             $io->title("Fixtures in group \"$group\".");
             $io->listing($this->getListing($fixtures));
 
-            return;
+            return 0;
         }
 
         if (false !== $input->getOption('grouped')) {
@@ -61,7 +61,7 @@ class DebugCommand extends Command
                 $io->listing($this->getListing($fixtures));
             }
 
-            return;
+            return 0;
         }
 
         $io->title('All fixtures');

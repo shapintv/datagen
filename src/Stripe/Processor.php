@@ -28,6 +28,10 @@ class Processor implements ProcessorInterface
      */
     public function process(FixtureInterface $fixture, array $options = []): void
     {
+        if (!$fixture instanceof Fixture) {
+            throw new \InvalidArgumentException('You must provider an instance of '.Fixture::class);
+        }
+
         $api = $this->getApi($fixture);
 
         foreach ($fixture->getObjects() as $key => $object) {
@@ -39,7 +43,7 @@ class Processor implements ProcessorInterface
                 // Doing nothing for now
             }
 
-            if (is_string($key)) {
+            if (\is_string($key)) {
                 $this->referenceManager->add($fixture->getObjectName(), $key, $object);
             }
         }
