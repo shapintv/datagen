@@ -64,7 +64,7 @@ class Processor implements ProcessorInterface
 
                 $this->connection->insert($fixture->getTableName(), $fields, $fixture->getTypes());
 
-                if (is_string($key)) {
+                if (\is_string($key)) {
                     $this->referenceManager->add($fixture->getTableName(), $key, $fields);
                 }
             }
@@ -81,7 +81,7 @@ class Processor implements ProcessorInterface
 
     private function resolveOption(array $options, string $key, $defaultValue = null)
     {
-        if (!array_key_exists($key, $options)) {
+        if (!\array_key_exists($key, $options)) {
             return $defaultValue;
         }
 

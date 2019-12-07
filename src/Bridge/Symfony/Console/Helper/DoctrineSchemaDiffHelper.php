@@ -33,7 +33,7 @@ class DoctrineSchemaDiffHelper
 
     protected function renderRemovedTables(): void
     {
-        if (0 === count($this->diff->removedTables)) {
+        if (0 === \count($this->diff->removedTables)) {
             return;
         }
 
@@ -43,7 +43,7 @@ class DoctrineSchemaDiffHelper
 
     protected function renderNewTables(): void
     {
-        if (0 === count($this->diff->newTables)) {
+        if (0 === \count($this->diff->newTables)) {
             return;
         }
 
@@ -53,7 +53,7 @@ class DoctrineSchemaDiffHelper
 
     protected function renderChangedTables(): void
     {
-        if (0 === count($this->diff->changedTables)) {
+        if (0 === \count($this->diff->changedTables)) {
             return;
         }
 
@@ -68,7 +68,7 @@ class DoctrineSchemaDiffHelper
         $removedColumns = $tableDiff->removedColumns;
         $changedColumns = $this->filterChangedColumns($tableDiff->changedColumns);
 
-        if (0 === count($addedColumns + $removedColumns + $changedColumns)) {
+        if (0 === \count($addedColumns + $removedColumns + $changedColumns)) {
             return;
         }
 
@@ -108,10 +108,10 @@ class DoctrineSchemaDiffHelper
 
         $options = $this->filterOptions($column);
 
-        if (0 < count($options)) {
+        if (0 < \count($options)) {
             $formattedOptions = [];
             foreach ($options as $key => $value) {
-                $formattedValue = is_bool($value) ? $value ? 'true' : 'false' : $value;
+                $formattedValue = \is_bool($value) ? $value ? 'true' : 'false' : $value;
                 $formattedOptions[] = "$key => $formattedValue";
             }
 

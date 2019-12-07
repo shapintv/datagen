@@ -26,6 +26,6 @@ class Kernel extends BaseKernel
     {
         $r = new \ReflectionObject($this);
 
-        return \dirname($r->getFileName());
+        return dirname($r->getFileName());
     }
 }

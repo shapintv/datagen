@@ -20,14 +20,14 @@ class ReferenceManager
 
     public function add(string $fixture, string $name, $data): void
     {
-        if (!array_key_exists($fixture, $this->references)) {
+        if (!$this->references->offsetExists($fixture)) {
             $this->references[$fixture] = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
         }
-        if (array_key_exists($name, $this->references[$fixture])) {
+        if ($this->references[$fixture]->offsetExists($name)) {
             throw new DuplicateReferenceException($fixture, $name);
         }
 
-        if (is_array($data)) {
+        if (\is_array($data)) {
             $data = new \ArrayObject($data, \ArrayObject::ARRAY_AS_PROPS);
         }
 
@@ -37,12 +37,12 @@ class ReferenceManager
     public function findAndReplace(array $data): array
     {
         $keys = array_keys($data);
-        for ($i = 0; $i < count($data); ++$i) {
+        for ($i = 0; $i < \count($data); ++$i) {
             $value = $data[$keys[$i]];
-            if (is_string($value) && $this->isReference($value)) {
+            if (\is_string($value) && $this->isReference($value)) {
                 $data[$keys[$i]] = $this->resolveReference($value);
             }
-            if (is_array($value)) {
+            if (\is_array($value)) {
                 $data[$keys[$i]] = $this->findAndReplace($value);
             }
         }
