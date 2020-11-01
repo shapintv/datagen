@@ -25,6 +25,7 @@
         "shapin/stripe": "dev-master"
     },
     "suggest": {
+        "doctrine/dbal": "Needed to load DBAL fixtures",
         "shapin/stripe": "Needed to load Stripe fixtures"
     },
     "autoload": {
