@@ -20,20 +20,45 @@ The recommended way to install Datagen is through
 The main entrypoint is the `Shapin\Datagen\Datagen` class and its `load` method.
 
 ```php
+use Doctrine\DBAL\DriverManager;
+use Shapin\Stripe\StripeClient;
+use Symfony\Component\HttpClient\HttpClient;
+
 use Shapin\Datagen\Datagen;
 use Shapin\Datagen\DBAL\Processor as DBALProcessor;
 use Shapin\Datagen\Loader;
 use Shapin\Datagen\Stripe\Processor as StripeProcessor;
+use Shapin\Datagen\ReferenceManager;
 
 // Create a Loader for your fixtures
 $loader = new Loader();
-$loader->addFixtures(MyAwesomeFixture(), ['group1', 'group2']);
-$loader->addFixtures(AnotherAwesomeFixture()); // Grousp are faculative
+$loader->addFixture(new MyAwesomeFixture(), ['group1', 'group2']);
+$loader->addFixture(new AnotherAwesomeFixture()); // Groups are faculative
+
+$referenceManager = new ReferenceManager();
+
+$connectionParams = [
+    'dbname' => 'testDB',
+    'user' => 'user',
+    'password' => 'pass',
+    'host' => 'localhost',
+    'driver' => 'pdo_mysql',
+];
+$connection = DriverManager::getConnection($connectionParams);
+
+$httpClient = HttpClient::create([
+    'base_uri' => 'http://127.0.0.1:12111/v1/',
+    'auth_bearer' => 'api_key',
+    'headers' => [
+        'Content-Type' => 'application/json',
+    ],
+]);
+$stripeClient = new StripeClient($httpClient);
 
 // Create your processors (see next section for more information regarding supported fixtures)
 $processors = [
-    new DBALProcessor($connection),
-    new StripeProcessor($stripeClient),
+    new DBALProcessor($connection, $referenceManager),
+    new StripeProcessor($stripeClient, $referenceManager),
 ];
 
 // Create a Datagen
@@ -178,6 +203,7 @@ You can (and should!) name all your fixtures in order to be allowed to use them 
 ```php
 <?php
 
+use Doctrine\DBAL\Schema\Schema;
 use Shapin\Datagen\DBAL\Table;
 use Ramsey\Uuid\Uuid;
 
@@ -185,6 +211,13 @@ class Category extends Table
 {
     protected static $tableName = 'category';
     protected static $order = 15;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addTableToSchema(Schema $schema)
+    {
+    }
 
     /**
      * {@inheritdoc}
@@ -210,6 +243,13 @@ class Subcategory extends Table
 {
     protected static $tableName = 'subcategory';
     protected static $order = 25;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addTableToSchema(Schema $schema)
+    {
+    }
 
     /**
      * {@inheritdoc}
