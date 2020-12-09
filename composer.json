@@ -15,7 +15,7 @@
         "psr/log": "^1.0"
     },
     "require-dev": {
-        "doctrine/doctrine-bundle": "^1.8",
+        "doctrine/doctrine-bundle": "^2.2",
         "phpunit/phpunit": "^8.5",
         "symfony/http-kernel": "^4.4|^5.1",
         "symfony/framework-bundle": "^4.4|^5.1",
