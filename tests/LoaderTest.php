@@ -12,7 +12,7 @@ class LoaderTest extends TestCase
 {
     private $loader;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->loader = new Loader();
         $this->loader->addFixture(new Table\Table1(), ['group1']);
@@ -23,19 +23,19 @@ class LoaderTest extends TestCase
         $this->loader->addFixture(new Table\Table6(), ['group1', 'group2']);
     }
 
-    public function test_getAll()
+    public function testGetAll()
     {
         $fixtures = $this->loader->getFixtures();
         $this->assertCount(6, $fixtures);
     }
 
-    public function test_getGroup()
+    public function testGetGroup()
     {
         $fixtures = $this->loader->getFixtures(['group1']);
         $this->assertCount(4, $fixtures);
     }
 
-    public function test_excludeGroup()
+    public function testExcludeGroup()
     {
         $fixtures = $this->loader->getFixtures([], ['group1']);
         $this->assertCount(2, $fixtures);
@@ -48,7 +48,7 @@ class LoaderTest extends TestCase
         $this->loader->getFixtures(['group1'], ['group1']);
     }
 
-    public function test_getUnknwonGroup()
+    public function testGetUnknwonGroup()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Unknown group "group42". Available: ["group1", "group2"]');

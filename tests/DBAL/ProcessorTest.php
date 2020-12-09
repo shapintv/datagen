@@ -18,7 +18,7 @@ class ProcessorTest extends TestCase
     private $referenceManager;
     private $processor;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->connection = $this->prophesize(Connection::class);
         $this->connection->getDatabasePlatform()->willReturn(new SqlitePlatform());

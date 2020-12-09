@@ -6,29 +6,18 @@ namespace Shapin\Datagen;
 
 use Shapin\Datagen\Exception\DuplicateReferenceException;
 use Shapin\Datagen\Exception\UnknownReferenceException;
-use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ReferenceManager
 {
-    private $references;
-
-    public function __construct()
-    {
-        $this->references = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
-    }
+    private $references = [];
 
     public function add(string $fixture, string $name, $data): void
     {
-        if (!$this->references->offsetExists($fixture)) {
-            $this->references[$fixture] = new \ArrayObject([], \ArrayObject::ARRAY_AS_PROPS);
+        if (!isset($this->references[$fixture])) {
+            $this->references[$fixture] = [];
         }
-        if ($this->references[$fixture]->offsetExists($name)) {
+        if (isset($this->references[$fixture][$name])) {
             throw new DuplicateReferenceException($fixture, $name);
-        }
-
-        if (\is_array($data)) {
-            $data = new \ArrayObject($data, \ArrayObject::ARRAY_AS_PROPS);
         }
 
         $this->references[$fixture][$name] = $data;
@@ -57,15 +46,19 @@ class ReferenceManager
 
     private function resolveReference(string $value)
     {
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
         $parts = explode(':', $value);
 
-        $ref = $parts[1];
+        $accessors = explode('.', $parts[1]);
 
-        try {
-            return $propertyAccessor->getValue($this->references, $ref);
-        } catch (NoSuchPropertyException $e) {
-            throw new UnknownReferenceException("Unable to resolve Reference \"$value\".", 0, $e);
+        $array = $this->references;
+        foreach ($accessors as $accessor) {
+            if (!isset($array[$accessor])) {
+                throw new UnknownReferenceException("Unable to resolve Reference \"$value\".");
+            }
+
+            $array = $array[$accessor];
         }
+
+        return $array;
     }
 }

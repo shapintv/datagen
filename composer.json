@@ -11,17 +11,16 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "psr/log": "^1.0",
-        "symfony/property-access": "^4.3|^5.0"
+        "php": ">7.2",
+        "psr/log": "^1.0"
     },
     "require-dev": {
         "doctrine/doctrine-bundle": "^1.8",
         "phpunit/phpunit": "^8.5",
-        "symfony/http-kernel": "^4.3|^5.0",
-        "symfony/framework-bundle": "^4.3|^5.0",
-        "symfony/yaml": "^4.3|^5.0",
-        "symfony/phpunit-bridge": "^4.4|^5.0",
+        "symfony/http-kernel": "^4.4|^5.1",
+        "symfony/framework-bundle": "^4.4|^5.1",
+        "symfony/yaml": "^4.4|^5.1",
+        "symfony/phpunit-bridge": "^4.4|^5.1",
         "shapin/stripe": "dev-master"
     },
     "suggest": {
